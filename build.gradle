@@ -46,3 +46,9 @@ test {
     useJUnitPlatform()
 }
  */
+
+run.dependsOn('rsa1:jar')
+run.dependsOn('rsa2:jar')
+run.dependsOn('rsa_cracker:jar')
+run.dependsOn('shift:jar')
+run.dependsOn('shift_cracker:jar')

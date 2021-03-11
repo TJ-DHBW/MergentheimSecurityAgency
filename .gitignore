@@ -4,3 +4,8 @@
 /build/classes/java/main/
 /.idea/
 /gradle/
+/components/rsa1/build/
+/components/rsa2/build/
+/components/rsa_cracker/build/
+/components/shift/build/
+/components/shift_cracker/build/

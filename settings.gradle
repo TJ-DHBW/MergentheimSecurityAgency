@@ -1,2 +1,13 @@
 rootProject.name = 'MergentheimSecurityAgency'
 
+include 'components/rsa1'
+include 'components/rsa2'
+include 'components/rsa_cracker'
+include 'components/shift'
+include 'components/shift_cracker'
+
+project(':components/rsa1').name = 'rsa1'
+project(':components/rsa2').name = 'rsa2'
+project(':components/rsa_cracker').name = 'rsa_cracker'
+project(':components/shift').name = 'shift'
+project(':components/shift_cracker').name = 'shift_cracker'
