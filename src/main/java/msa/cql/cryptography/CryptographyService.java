@@ -9,55 +9,56 @@ import java.net.URLClassLoader;
 
 public class CryptographyService {
 
-    public static String encrypt(String message, String algorithm, String keyFileName) {
-        if (message == null || algorithm == null || keyFileName == null)
+    public static String encrypt(String plainMessage, String algorithm, String keyFileName) {
+        if (plainMessage == null || algorithm == null || keyFileName == null)
             throw new IllegalArgumentException("Parameters cant be null.");
 
         //TODO Test this
-        File file = new File(Configuration.instance.keyFileFolder + Configuration.instance.fileSeparator + keyFileName);
+        File keyFile = new File(Configuration.instance.keyFileFolder + Configuration.instance.fileSeparator + keyFileName);
         ICryptographyAlgorithm cryptoAlgorithm = getAlgorithmImplementationByString(algorithm);
 
         switch (algorithm) {
             case "rsa":
-                return ((IRSAAlgorithm) cryptoAlgorithm).encrypt(message, file);
+                return ((IRSAAlgorithm) cryptoAlgorithm).encrypt(plainMessage, keyFile);
             case "shift":
-                return ((IShiftAlgorithm) cryptoAlgorithm).encrypt(message, file);
+                return ((IShiftAlgorithm) cryptoAlgorithm).encrypt(plainMessage, keyFile);
             default:
                 throw new IllegalArgumentException("There is no implementation for the " + algorithm + " algorithm.");
         }
     }
 
-    public static String decrypt(String message, String algorithm, String keyFileName) {
-        if (message == null || algorithm == null || keyFileName == null)
+    public static String decrypt(String encryptedMessage, String algorithm, String keyFileName) {
+        if (encryptedMessage == null || algorithm == null || keyFileName == null)
             throw new IllegalArgumentException("Parameters cant be null.");
 
         //TODO Test this
-        File file = new File(Configuration.instance.keyFileFolder + Configuration.instance.fileSeparator + keyFileName);
+        File keyFile = new File(Configuration.instance.keyFileFolder + Configuration.instance.fileSeparator + keyFileName);
         ICryptographyAlgorithm cryptoAlgorithm = getAlgorithmImplementationByString(algorithm);
 
         switch (algorithm) {
             case "rsa":
-                return ((IRSAAlgorithm) cryptoAlgorithm).decrypt(message, file);
+                return ((IRSAAlgorithm) cryptoAlgorithm).decrypt(encryptedMessage, keyFile);
             case "shift":
-                return ((IShiftAlgorithm) cryptoAlgorithm).decrypt(message, file);
+                return ((IShiftAlgorithm) cryptoAlgorithm).decrypt(encryptedMessage, keyFile);
             default:
                 throw new IllegalArgumentException("There is no implementation for the " + algorithm + " algorithm.");
         }
     }
 
     //TODO Test this
-    public static String crack(String message, String algorithm, String keyFileName) {
-        if (message == null || algorithm == null) throw new IllegalArgumentException("Parameters cant be null.");
+    public static String crack(String encryptedMessage, String algorithm, String keyFileName) {
+        if (encryptedMessage == null || algorithm == null)
+            throw new IllegalArgumentException("Parameters cant be null.");
 
         ICryptographyCracker cryptoCracker = getCrackerImplementationByString(algorithm);
 
         switch (algorithm) {
             case "rsa":
                 if (keyFileName == null) throw new IllegalArgumentException("keyFileName can not be null for RSA.");
-                File file = new File(Configuration.instance.keyFileFolder + Configuration.instance.fileSeparator + keyFileName);
-                return ((IRSACracker) cryptoCracker).decrypt(message, file);
+                File keyFile = new File(Configuration.instance.keyFileFolder + Configuration.instance.fileSeparator + keyFileName);
+                return ((IRSACracker) cryptoCracker).decrypt(encryptedMessage, keyFile);
             case "shift":
-                return ((IShiftCracker) cryptoCracker).decrypt(message);
+                return ((IShiftCracker) cryptoCracker).decrypt(encryptedMessage);
             default:
                 throw new IllegalArgumentException("There is no implementation for the " + algorithm + " cracker.");
         }
