@@ -1,8 +1,6 @@
 package msa;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,6 +8,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import msa.cql.CQLManager;
 
 public class GUI extends Application {
     public void start(Stage primaryStage) {
@@ -33,17 +32,28 @@ public class GUI extends Application {
         outputArea.setWrapText(true);
         outputArea.setEditable(false);
 
-        executeButton.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event) {
-                System.out.println("[execute] pressed");
+        CQLManager cqlManager = new CQLManager();
+
+        executeButton.setOnAction(event -> {
+            System.out.println("[execute] pressed");
+            String returnValue = cqlManager.handle(commandLineArea.getText());
+            commandLineArea.clear();
+            if (returnValue == null) {
+                // Not a valid query
+                outputArea.setText("Your input was not a valid query.");
+            } else if (returnValue.startsWith(" ")) {
+                // No info to return
+                //TODO reset output Area?
+                outputArea.clear();
+            } else {
+                // Has info to return
+                outputArea.setText(returnValue);
             }
         });
 
-        closeButton.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent actionEvent) {
-                System.out.println("[close] pressed");
-                System.exit(0);
-            }
+        closeButton.setOnAction(actionEvent -> {
+            System.out.println("[close] pressed");
+            System.exit(0);
         });
 
         hBox.getChildren().addAll(executeButton, closeButton);
