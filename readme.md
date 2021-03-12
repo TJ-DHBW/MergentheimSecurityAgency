@@ -10,8 +10,8 @@
     - **08** intrude channel
     - ~~**10** encrypt message~~
     - ~~**11** decrypt message~~
-    - **13** Komponente shift.jar
-    - **16** Komponente rsa_cracker.jar
+    - ~~**13** Komponente shift.jar~~
+    - ~~**16** Komponente rsa_cracker.jar~~
 
 <br>
 
@@ -31,3 +31,7 @@
 - Komponenten sind signiert
 - Nur signierte Komponenten werden geladen.
 - Schlüssel im JSON-Format
+
+## Personal Todos
+
+- Check the keyFiles before passing them to the algorithm.

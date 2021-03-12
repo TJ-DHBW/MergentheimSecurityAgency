@@ -24,8 +24,8 @@ public enum Configuration {
 
     //TODO insert the fully qualified classname of the components.
     public final String rsaClassName = "";
-    public final String rsaCrackerClassName = "";
-    public final String shiftClassName = "";
+    public final String rsaCrackerClassName = "RSACrackerWrapper";
+    public final String shiftClassName = "Shift";
     public final String shiftCrackerClassName = "";
 
 }
