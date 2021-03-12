@@ -25,3 +25,9 @@
     - **14** Komponente rsa.jar
     - **15** Komponente shift_cracker.jar
 
+## Weiteres Zeug das man schnell mal vergisst
+
+- durch Drücken der Taste \[F5] wird der Befehl ausgeführt
+- Komponenten sind signiert
+- Nur signierte Komponenten werden geladen.
+- Schlüssel im JSON-Format
