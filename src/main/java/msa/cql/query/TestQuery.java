@@ -1,5 +1,7 @@
 package msa.cql.query;
 
+import msa.cql.QueryContext;
+
 import java.util.regex.MatchResult;
 
 /**
@@ -11,7 +13,7 @@ public class TestQuery extends BaseQuery {
     }
 
     @Override
-    public String execute(MatchResult matchResult) {
-        return matchResult.group(1);
+    public void execute(MatchResult matchResult, QueryContext context) {
+        context.setQueryResult(matchResult.group(1));
     }
 }

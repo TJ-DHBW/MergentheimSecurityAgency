@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import msa.cql.CQLManager;
+import msa.db.HSQLDatabase;
 
 public class GUI extends Application {
     public void start(Stage primaryStage) {
@@ -32,22 +33,24 @@ public class GUI extends Application {
         outputArea.setWrapText(true);
         outputArea.setEditable(false);
 
-        CQLManager cqlManager = new CQLManager();
+        //TODO Make the creation of the database a bit more beautiful O.O
+        CQLManager cqlManager = new CQLManager(new HSQLDatabase());
 
         executeButton.setOnAction(event -> {
             System.out.println("[execute] pressed");
-            String returnValue = cqlManager.handle(commandLineArea.getText());
+            cqlManager.handle(commandLineArea.getText());
+            String queryResult = cqlManager.getContext().pullQueryResult();
             commandLineArea.clear();
-            if (returnValue == null) {
+            if (queryResult.equals("")) {
                 // Not a valid query
                 outputArea.setText("Your input was not a valid query.");
-            } else if (returnValue.startsWith(" ")) {
+            } else if (queryResult.startsWith(" ")) {
                 // No info to return
                 //TODO reset output Area?
                 outputArea.clear();
             } else {
                 // Has info to return
-                outputArea.setText(returnValue);
+                outputArea.setText(queryResult);
             }
         });
 

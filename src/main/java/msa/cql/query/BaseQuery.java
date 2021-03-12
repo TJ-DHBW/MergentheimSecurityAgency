@@ -1,5 +1,7 @@
 package msa.cql.query;
 
+import msa.cql.QueryContext;
+
 import java.util.regex.MatchResult;
 import java.util.regex.Pattern;
 
@@ -10,7 +12,7 @@ public abstract class BaseQuery {
         this.pattern = Pattern.compile(regexString, Pattern.CASE_INSENSITIVE);
     }
 
-    public abstract String execute(MatchResult matchResult);
+    public abstract void execute(MatchResult matchResult, QueryContext context);
 
     public Pattern getPattern() {
         return pattern;

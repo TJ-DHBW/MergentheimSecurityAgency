@@ -1,5 +1,6 @@
 package msa.cql.query;
 
+import msa.cql.QueryContext;
 import msa.cql.cryptography.CryptographyService;
 
 import java.util.regex.MatchResult;
@@ -11,7 +12,7 @@ public class DecryptQuery extends BaseQuery {
 
     //TODO Test this
     @Override
-    public String execute(MatchResult matchResult) {
-        return CryptographyService.decrypt(matchResult.group(1), matchResult.group(2), matchResult.group(3));
+    public void execute(MatchResult matchResult, QueryContext context) {
+        context.setQueryResult(CryptographyService.decrypt(matchResult.group(1), matchResult.group(2), matchResult.group(3)));
     }
 }

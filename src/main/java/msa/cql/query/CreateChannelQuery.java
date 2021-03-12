@@ -1,5 +1,7 @@
 package msa.cql.query;
 
+import msa.cql.QueryContext;
+
 import java.util.regex.MatchResult;
 
 public class CreateChannelQuery extends BaseQuery {
@@ -8,8 +10,8 @@ public class CreateChannelQuery extends BaseQuery {
     }
 
     @Override
-    public String execute(MatchResult matchResult) {
+    public void execute(MatchResult matchResult, QueryContext context) {
+        context.setQueryResult(" ");
         //TODO implement
-        return null;
     }
 }
