@@ -1,8 +1,7 @@
 package msa.cql;
 
 import msa.Configuration;
-import msa.cql.query.BaseQuery;
-import msa.cql.query.TestQuery;
+import msa.cql.query.*;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -14,6 +13,12 @@ public class CQLManager {
         queries = new ArrayList<>();
         //TODO remove the TestQuery
         queries.add(new TestQuery());
+
+        queries.add(new RegisterQuery());
+        queries.add(new CreateChannelQuery());
+        queries.add(new IntrudeChannelQuery());
+        queries.add(new EncryptQuery());
+        queries.add(new DecryptQuery());
         //TODO add all the queries to the List ^-^
     }
 
