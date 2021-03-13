@@ -1,0 +1,37 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property> -->
+        <property name="dialect">org.hibernate.dialect.HSQLDialect</property>
+        <property name="hibernate.dialect.storage_engine">innodb</property>
+
+        <property name="hibernate.connection.driver_class">
+            org.hsqldb.jdbcDriver
+        </property>
+
+
+        <property name="javax.persistence.schema-generation.database.action">
+            drop-and-create
+        </property>
+
+        <!-- Assume test is the database name -->
+
+        <!-- <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/db?createDatabaseIfNotExist=true</property> -->
+        <property name="connection.url">jdbc:hsqldb:mem:msa</property>
+        <property name="connection.pool_size">1</property>
+        <property name="current_session_context_class">thread</property>
+        <property name="hibernate.connection.username">sa</property>
+        <property name="hibernate.connection.password"></property>
+        <property name="hibernate.hbm2ddl.auto">create-drop</property>
+        <property name="show_sql">true</property>
+
+        <!-- List of class mapping -->
+        <mapping class="msa.db.model.Algorithm"/>
+        <mapping class="msa.db.model.Channel"/>
+        <mapping class="msa.db.model.Message"/>
+        <mapping class="msa.db.model.Participant"/>
+        <mapping class="msa.db.model.Postbox"/>
+        <mapping class="msa.db.model.Type"/>
+    </session-factory>
+</hibernate-configuration>
