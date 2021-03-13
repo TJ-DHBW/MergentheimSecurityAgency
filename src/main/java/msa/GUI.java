@@ -10,12 +10,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import msa.cql.CQLManager;
 import msa.db.HSQLDatabase;
-import msa.db.HibernateUtil;
-import msa.db.model.Algorithm;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-
-import java.util.List;
 
 public class GUI extends Application {
     public void start(Stage primaryStage) {
@@ -40,17 +34,9 @@ public class GUI extends Application {
         outputArea.setEditable(false);
 
         //TODO Make the creation of the database a bit more beautiful O.O
-        CQLManager cqlManager = new CQLManager(new HSQLDatabase());
-
-        //TODO Testing - REMOVE PLS
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        session.save(new Algorithm("rsa"));
-        session.save(new Algorithm("shift"));
-        transaction.commit();
-
-        List<Algorithm> algs = session.createQuery("from Algorithm", Algorithm.class).list();
-        algs.forEach(alg -> System.out.println(alg.getName()));
+        HSQLDatabase database = new HSQLDatabase();
+        database.init();
+        CQLManager cqlManager = new CQLManager(database);
 
         executeButton.setOnAction(event -> {
             System.out.println("[execute] pressed");

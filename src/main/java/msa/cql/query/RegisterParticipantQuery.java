@@ -24,7 +24,7 @@ public class RegisterParticipantQuery extends BaseQuery {
                 context.getDatabase().save(participant);
                 //TODO Create the postbox
 
-                context.setQueryResult("participant " + participant.getName() + " with type " + participant.getType() + " registered and postbox_" + participant.getName() + " created");
+                context.setQueryResult("participant " + participant.getName() + " with type " + participant.getType().getName() + " registered and postbox_" + participant.getName() + " created");
             } else {
                 context.setQueryResult("the given type " + matchResult.group(2) + " does not exist.");
             }

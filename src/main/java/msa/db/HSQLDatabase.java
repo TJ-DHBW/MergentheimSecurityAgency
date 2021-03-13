@@ -17,6 +17,13 @@ public class HSQLDatabase implements IMSADatabase {
         this.session = HibernateUtil.getSessionFactory().openSession();
     }
 
+    public void init() {
+        session.save(new Algorithm("rsa"));
+        session.save(new Algorithm("shift"));
+        session.save(new Type("normal"));
+        session.save(new Type("intruder"));
+    }
+
     @Override
     public void save(Object object) {
         session.save(object);
