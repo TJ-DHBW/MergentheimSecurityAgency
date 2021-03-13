@@ -76,7 +76,7 @@ public class HSQLDatabase implements IMSADatabase {
     //TODO IMPORTANT Test
     @Override
     public List<Channel> findAllChannelWithParticipant(Participant participant) {
-        String queryString = "FROM Channel C WHERE C.participant_01 = :participant OR C.participant_02 = :participant";
+        String queryString = "FROM Channel C WHERE C.participant1 = :participant OR C.participant2 = :participant";
         Query<Channel> query = session.createQuery(queryString, Channel.class);
         query.setParameter("participant", participant);
         return query.list();
@@ -85,7 +85,7 @@ public class HSQLDatabase implements IMSADatabase {
     //TODO IMPORTANT Test
     @Override
     public Channel findChannelByParticipants(Participant participant1, Participant participant2) {
-        String queryString = "FROM Channel C WHERE (C.participant_01 = :participant1 AND C.participant_02 = :participant2) OR (C.participant_01 = :participant2 AND C.participant_02 = :participant1)";
+        String queryString = "FROM Channel C WHERE (C.participant1 = :participant1 AND C.participant2 = :participant2) OR (C.participant1 = :participant2 AND C.participant2 = :participant1)";
         Query<Channel> query = session.createQuery(queryString, Channel.class);
         query.setParameter("participant1", participant1);
         query.setParameter("participant2", participant2);
