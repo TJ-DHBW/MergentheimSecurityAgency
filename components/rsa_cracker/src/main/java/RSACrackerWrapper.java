@@ -1,3 +1,5 @@
+import msa.cql.cryptography.interfaces.IRSACracker;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -7,7 +9,11 @@ import java.math.BigInteger;
 //TODO Test this
 public class RSACrackerWrapper {
     private static final RSACrackerWrapper instance = new RSACrackerWrapper();
-    public Port port;
+    public Port port = new Port();
+
+    public static RSACrackerWrapper getInstance() {
+        return instance;
+    }
 
     public String innerDecrypt(String encryptedMessage, File publicKeyFile) {
         BigInteger[] key = extractKeyFromKeyFile(publicKeyFile);
@@ -35,6 +41,8 @@ public class RSACrackerWrapper {
             }
 
             String[] splitFile = fileContent.toString().split(",");
+            splitFile[0] = splitFile[0].split(":")[1];
+            splitFile[1] = splitFile[1].split(":")[1];
 
             BigInteger[] ret = new BigInteger[2];
 

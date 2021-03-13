@@ -1,3 +1,5 @@
+import msa.cql.cryptography.interfaces.IShiftAlgorithm;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -6,7 +8,11 @@ import java.io.IOException;
 //TODO Test this
 public class Shift {
     private static final Shift instance = new Shift();
-    public Port port;
+    public Port port = new Port();
+
+    public static Shift getInstance() {
+        return instance;
+    }
 
     public String innerEncrypt(String plainMessage, File keyFile) {
         String keyString = extractKeyFromKeyFile(keyFile);
@@ -37,8 +43,9 @@ public class Shift {
             while ((line = reader.readLine()) != null) {
                 fileContent.append(line);
             }
-            if (fileContent.indexOf("\"") != fileContent.lastIndexOf("\"") && fileContent.lastIndexOf("\"") != -1) {
-                return fileContent.substring(fileContent.indexOf("\"") + 1, fileContent.lastIndexOf("\""));
+            String rightSide = fileContent.toString().split(":")[1];
+            if (rightSide.indexOf("\"") != rightSide.lastIndexOf("\"") && rightSide.lastIndexOf("\"") != -1) {
+                return rightSide.substring(rightSide.indexOf("\"") + 1, rightSide.lastIndexOf("\""));
             }
         } catch (IOException e) {
             e.printStackTrace();

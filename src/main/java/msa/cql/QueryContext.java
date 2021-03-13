@@ -9,6 +9,7 @@ public class QueryContext {
 
     public QueryContext(IMSADatabase database) {
         this.database = database;
+        queryResult = "";
     }
 
     public IMSADatabase getDatabase() {
@@ -27,7 +28,7 @@ public class QueryContext {
     }
 
     public void setQueryResult(String queryResult) {
-        if (queryResult.equals("")) {
+        if (this.queryResult.equals("")) {
             this.queryResult = queryResult;
         } else {
             throw new IllegalStateException("The last queryResult has not yet been read!");
