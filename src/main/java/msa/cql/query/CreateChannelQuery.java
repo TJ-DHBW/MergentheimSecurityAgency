@@ -13,6 +13,7 @@ public class CreateChannelQuery extends BaseQuery {
     }
 
     //TODO Simulation
+    //TODO Test
     @Override
     public void execute(MatchResult matchResult, QueryContext context) {
         String channelName = matchResult.group(1);
