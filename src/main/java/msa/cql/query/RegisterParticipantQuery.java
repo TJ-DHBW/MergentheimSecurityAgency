@@ -6,13 +6,14 @@ import msa.db.model.Type;
 
 import java.util.regex.MatchResult;
 
-public class RegisterQuery extends BaseQuery {
-    public RegisterQuery() {
+public class RegisterParticipantQuery extends BaseQuery {
+    public RegisterParticipantQuery() {
         super("^register participant (\\S+) with type (\\S+)$");
     }
 
     //TODO Do the simulation.
     //TODO prettify the return Strings for the postboxes.
+    //TODO Test this
     @Override
     public void execute(MatchResult matchResult, QueryContext context) {
         Participant participant = context.getDatabase().findParticipantByName(matchResult.group(1));

@@ -16,7 +16,7 @@ public class CQLManager {
         //TODO remove the TestQuery
         queries.add(new TestQuery());
 
-        queries.add(new RegisterQuery());
+        queries.add(new RegisterParticipantQuery());
         queries.add(new CreateChannelQuery());
         queries.add(new IntrudeChannelQuery());
         queries.add(new EncryptQuery());
