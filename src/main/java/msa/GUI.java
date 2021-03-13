@@ -35,8 +35,9 @@ public class GUI extends Application {
 
         //TODO Make the creation of the database a bit more beautiful O.O
         HSQLDatabase database = new HSQLDatabase();
-        database.init();
+        database.init();                                                // Fill database with available algorithms etc.
         CQLManager cqlManager = new CQLManager(database);
+        cqlManager.handleAll(Configuration.instance.simulationQueries); // Simulation
 
         executeButton.setOnAction(event -> {
             System.out.println("[execute] pressed");

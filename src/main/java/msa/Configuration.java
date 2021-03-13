@@ -28,4 +28,14 @@ public enum Configuration {
     public final String shiftClassName = "Shift";
     public final String shiftCrackerClassName = "";
 
+    public final String[] simulationQueries = new String[]{"register participant branch_hkg with type normal",
+            "register participant branch_cpt with type normal",
+            "register participant branch_sfo with type normal",
+            "register participant branch_syd with type normal",
+            "register participant branch_wuh with type normal",
+            "register participant msa with type intruder",
+            "create channel hgk_wuh from branch_hkg to branch_wuh",
+            "create channel hgk_cpt from branch_hkg to branch_cpt",
+            "create channel cpt_syd from branch_cpt to branch_syd",
+            "create channel syd_sfo from branch_syd to branch_sfo"};
 }

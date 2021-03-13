@@ -40,6 +40,13 @@ public class CQLManager {
         }
     }
 
+    public void handleAll(String[] queries) {
+        for (String query : queries) {
+            handle(query);
+            context.pullQueryResult();
+        }
+    }
+
     public QueryContext getContext() {
         return context;
     }
