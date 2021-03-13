@@ -2,18 +2,27 @@ package msa.cql;
 
 import msa.db.IMSADatabase;
 
+import java.util.HashMap;
+
 public class QueryContext {
     private final IMSADatabase database;
+    private final HashMap<String, InMemoryChannel> channelz;
 
     private String queryResult;
 
     public QueryContext(IMSADatabase database) {
         this.database = database;
+        this.channelz = new HashMap<>();
+
         queryResult = "";
     }
 
     public IMSADatabase getDatabase() {
         return database;
+    }
+
+    public HashMap<String, InMemoryChannel> getChannelz() {
+        return channelz;
     }
 
     public String pullQueryResult() {
