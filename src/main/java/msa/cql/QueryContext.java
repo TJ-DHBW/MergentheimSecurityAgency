@@ -8,12 +8,14 @@ public class QueryContext {
     private final IMSADatabase database;
     private final HashMap<String, InMemoryChannel> channelz;
 
+    private boolean debugOn;
     private String queryResult;
 
     public QueryContext(IMSADatabase database) {
         this.database = database;
         this.channelz = new HashMap<>();
 
+        debugOn = false;
         queryResult = "";
     }
 
@@ -42,5 +44,13 @@ public class QueryContext {
         } else {
             throw new IllegalStateException("The last queryResult has not yet been read!");
         }
+    }
+
+    public boolean isDebugOn() {
+        return debugOn;
+    }
+
+    public void toggleDebug() {
+        this.debugOn = !debugOn;
     }
 }

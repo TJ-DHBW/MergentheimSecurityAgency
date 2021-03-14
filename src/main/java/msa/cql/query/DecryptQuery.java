@@ -1,5 +1,6 @@
 package msa.cql.query;
 
+import msa.cql.Logger;
 import msa.cql.QueryContext;
 import msa.cql.cryptography.CryptographyService;
 
@@ -13,6 +14,9 @@ public class DecryptQuery extends BaseQuery {
     //TODO Test this for rsa
     @Override
     public void execute(MatchResult matchResult, QueryContext context) {
-        context.setQueryResult(CryptographyService.decrypt(matchResult.group(1), matchResult.group(2), matchResult.group(3)));
+        String plainText = CryptographyService.decrypt(matchResult.group(1), matchResult.group(2), matchResult.group(3));
+        if (context.isDebugOn())
+            Logger.logDecryption(matchResult.group(1), plainText, matchResult.group(2), matchResult.group(3));
+        context.setQueryResult(plainText);
     }
 }
