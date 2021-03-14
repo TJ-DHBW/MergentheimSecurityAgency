@@ -13,12 +13,12 @@ public class Logger {
         key = key.replace("\n", "");
 
         String fileName = "encrypt_" + algorithm + "_" + Instant.now().getEpochSecond() + ".txt";
-        String content = "--Encryption--\n" +
-                "- Algorithm: " + algorithm + "\n" +
-                "- Plain text: " + encryptedMessage + "\n" +
-                "- Key: " + key + "\n" +
+        String content = "+++++Encryption+++++\n" +
+                " Algorithm: " + algorithm + "\n" +
+                "Plain text: " + plainMessage + "\n" +
+                "       Key: " + key + "\n" +
                 "\n" +
-                "- Result: " + plainMessage;
+                "Result: " + encryptedMessage;
 
         saveInLogFile(content, fileName);
     }
@@ -30,18 +30,19 @@ public class Logger {
         key = key.replace("\n", "");
 
         String fileName = "decrypt_" + algorithm + "_" + Instant.now().getEpochSecond() + ".txt";
-        String content = "--Decryption--\n" +
-                "- Algorithm: " + algorithm + "\n" +
-                "- Cypher: " + encryptedMessage + "\n" +
-                "- Key: " + key + "\n" +
+        String content = "+++++Decryption+++++\n" +
+                "Algorithm: " + algorithm + "\n" +
+                "   Cypher: " + encryptedMessage + "\n" +
+                "      Key: " + key + "\n" +
                 "\n" +
-                "- Result: " + plainMessage;
+                "Result: " + plainMessage;
 
         saveInLogFile(content, fileName);
     }
 
     //TODO Test this
     private static void saveInLogFile(String content, String fileName) {
+        createLogFolderIfNotPresent();
         File logFile = new File(Configuration.instance.logFileFolder + Configuration.instance.fileSeparator + fileName);
         if (logFile.exists()) //noinspection ResultOfMethodCallIgnored
             logFile.delete();
@@ -68,5 +69,13 @@ public class Logger {
         }
 
         return ret.toString();
+    }
+
+    private static void createLogFolderIfNotPresent() {
+        File logFolder = new File(Configuration.instance.logFileFolder);
+        if (logFolder.isDirectory()) return;
+        if (logFolder.exists()) throw new RuntimeException("A file blocks the name of the log folder.");
+        //noinspection ResultOfMethodCallIgnored
+        logFolder.mkdir();
     }
 }

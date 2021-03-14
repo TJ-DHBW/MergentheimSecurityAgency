@@ -1,5 +1,6 @@
 package msa.cql;
 
+import msa.Configuration;
 import msa.db.IMSADatabase;
 
 import java.util.HashMap;
@@ -52,5 +53,6 @@ public class QueryContext {
 
     public void toggleDebug() {
         this.debugOn = !debugOn;
+        if (Configuration.instance.verbose) System.out.println("Debug mode is now: " + debugOn);
     }
 }

@@ -9,3 +9,5 @@
 /components/rsa_cracker/build/
 /components/shift/build/
 /components/shift_cracker/build/
+/log/
+/keys/
