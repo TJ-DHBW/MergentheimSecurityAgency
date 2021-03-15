@@ -9,6 +9,11 @@ repositories {
     mavenCentral()
 }
 
+dependencies {
+    implementation 'org.json:json:20171018'
+    compile group: 'org.json', name: 'json', version: '20180813'
+}
+
 task build_jar(type: Jar) {
     project.archivesBaseName = "rsa"
 

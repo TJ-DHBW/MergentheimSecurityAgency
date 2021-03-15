@@ -12,6 +12,8 @@ repositories {
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    implementation 'org.json:json:20171018'
+    compile group: 'org.json', name: 'json', version: '20180813'
 }
 
 task build_jar(type: Jar) {

@@ -15,22 +15,21 @@ public class RSAWrapper {
         return instance;
     }
 
-    public String innerEncrypt(String plainMessage, File publicKeyFile) {
-        Key key = extractKeyFromKeyFile(publicKeyFile, false);
-        if (key == null) throw new IllegalStateException("Problem with the keyFile");
+    public String innerEncrypt(String plainMessage, File keyFile) {
+        Key key = extractKeyFromKeyFile(keyFile, false);
 
-        Cipher rsaCipher = new Cipher();
+        BigInteger plainMessageAsNumber = Utility.stringToNumber(plainMessage);
 
-        return Base64.getEncoder().encodeToString(rsaCipher.encrypt(plainMessage, key));
+        return String.valueOf(plainMessageAsNumber.modPow(key.getE(), key.getN()));
     }
 
-    public String innerDecrypt(String encryptedMessage, File privateKeyFile) {
-        Key key = extractKeyFromKeyFile(privateKeyFile, true);
+    public String innerDecrypt(String encryptedMessage, File keyFile) {
+        Key key = extractKeyFromKeyFile(keyFile, true);
         if (key == null) throw new IllegalStateException("Problem with the keyFile");
 
-        Cipher rsaCipher = new Cipher();
+        BigInteger encryptedMessageAsNumber = new BigInteger(encryptedMessage);
 
-        return rsaCipher.decrypt(encryptedMessage.getBytes(), key);
+        return String.valueOf(encryptedMessageAsNumber.modPow(key.getE(), key.getN()));
     }
 
     //TODO check if works, implement in other algorithms
@@ -56,7 +55,6 @@ public class RSAWrapper {
         }
         return null;
     }
-
     public class Port implements IRSAAlgorithm {
 
         @Override
