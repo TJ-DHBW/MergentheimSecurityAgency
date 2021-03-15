@@ -1,10 +1,8 @@
 import java.io.*;
 import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
-import interfaces.IRSAAlgorithm;
-import org.json.JSONArray;
+import msa.cpl.cryptography.interfaces.IRSAAlgorithm;
 import org.json.JSONObject;
 
 public class RSAWrapper {

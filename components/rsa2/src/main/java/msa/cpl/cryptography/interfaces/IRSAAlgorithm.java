@@ -1,4 +1,4 @@
-package interfaces;
+package msa.cpl.cryptography.interfaces;
 
 import java.io.File;
 

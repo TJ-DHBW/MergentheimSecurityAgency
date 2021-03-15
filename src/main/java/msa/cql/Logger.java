@@ -40,6 +40,21 @@ public class Logger {
         saveInLogFile(content, fileName);
     }
 
+    public static void logCrack(String encryptedMessage, String plainMessage, String algorithm, String keyFile){
+        String key = readWholeFile(new File(Configuration.instance.keyFileFolder + Configuration.instance.fileSeparator + keyFile));
+        key = key.replace("\n", "");
+
+        String fileName = "crack_" + algorithm + "_" + Instant.now().getEpochSecond() + ".txt";
+        String content = "+++++Crack+++++\n" +
+                "Algorithm: " + algorithm + "\n" +
+                "   Cypher: " + encryptedMessage + "\n" +
+                "      Key: " + key + "\n" +
+                "\n" +
+                "Result: " + plainMessage;
+
+        saveInLogFile(content, fileName);
+    }
+
     //TODO Test this
     private static void saveInLogFile(String content, String fileName) {
         createLogFolderIfNotPresent();
