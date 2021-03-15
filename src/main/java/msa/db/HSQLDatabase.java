@@ -25,13 +25,18 @@ public class HSQLDatabase implements IMSADatabase {
     }
 
     @Override
-    public void save(Object object) {
-        session.save(object);
+    public Integer save(Object object) {
+        return (Integer) session.save(object);
     }
 
     @Override
     public void delete(Object object) {
         session.delete(object);
+    }
+
+    @Override
+    public void update(Object object) {
+        session.update(object);
     }
 
     //TODO Test

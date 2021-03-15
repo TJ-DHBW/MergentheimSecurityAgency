@@ -3,6 +3,7 @@ package msa.db.model;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import java.time.Instant;
 
 @Entity
 @Table(name = "postbox")
@@ -27,4 +28,22 @@ public class Postbox {
 
     @Column(name = "timestamp")
     private Integer timestamp;
+
+    protected Postbox() {
+    }
+
+    public Postbox(Participant participantTo, Participant participantFrom, String message) {
+        this.participantTo = participantTo;
+        this.participantFrom = participantFrom;
+        this.message = message;
+        this.timestamp = Math.toIntExact(Instant.now().getEpochSecond());
+    }
+
+    public Postbox(Integer id, Participant participantTo, Participant participantFrom, String message) {
+        this.id = id;
+        this.participantTo = participantTo;
+        this.participantFrom = participantFrom;
+        this.message = message;
+        this.timestamp = Math.toIntExact(Instant.now().getEpochSecond());
+    }
 }

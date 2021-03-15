@@ -10,9 +10,11 @@ import java.util.List;
 public interface IMSADatabase {
     //TODO write some boring stuff in here.
 
-    void save(Object object);
+    Integer save(Object object);
 
     void delete(Object object);
+
+    void update(Object object);
 
     Algorithm findAlgorithmByName(String name);
 
