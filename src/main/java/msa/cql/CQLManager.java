@@ -16,7 +16,7 @@ public class CQLManager {
         //TODO remove the TestQuery
         queries.add(new TestQuery());
 
-        queries.add(new RegisterQuery());
+        queries.add(new RegisterParticipantQuery());
         queries.add(new CreateChannelQuery());
         queries.add(new IntrudeChannelQuery());
         queries.add(new EncryptQuery());
@@ -37,6 +37,13 @@ public class CQLManager {
                 query.execute(matcher.toMatchResult(), context);
                 return;
             }
+        }
+    }
+
+    public void handleAll(String[] queries) {
+        for (String query : queries) {
+            handle(query);
+            context.pullQueryResult();
         }
     }
 

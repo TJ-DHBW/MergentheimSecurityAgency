@@ -4,7 +4,7 @@
 
 - **Student 1**: TJ-DHBW
     - **01** Basisarchitektur
-    - **02** Taste \[F3], Debug-Modus
+    - ~~**02** Taste \[F3], Debug-Modus~~
     - **04** register participant
     - **05** create channel
     - **08** intrude channel
@@ -27,7 +27,7 @@
 
 ## Weiteres Zeug das man schnell mal vergisst
 
-- durch Drücken der Taste \[F5] wird der Befehl ausgeführt
+- ~~durch Drücken der Taste \[F5] wird der Befehl ausgeführt~~
 - Komponenten sind signiert
 - Nur signierte Komponenten werden geladen.
 - Schlüssel im JSON-Format

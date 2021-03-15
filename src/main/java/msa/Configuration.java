@@ -7,8 +7,9 @@ public enum Configuration {
     public final boolean verbose = true;
 
 
-    // Location of the key-files.
+    // FolderLocations
     public final String keyFileFolder = "keys";
+    public final String logFileFolder = "log";
 
 
     // For loading the various Algorithms.
@@ -28,4 +29,16 @@ public enum Configuration {
     public final String shiftClassName = "Shift";
     public final String shiftCrackerClassName = "";
 
+
+    // Simulation
+    public final String[] simulationQueries = new String[]{"register participant branch_hkg with type normal",
+            "register participant branch_cpt with type normal",
+            "register participant branch_sfo with type normal",
+            "register participant branch_syd with type normal",
+            "register participant branch_wuh with type normal",
+            "register participant msa with type intruder",
+            "create channel hgk_wuh from branch_hkg to branch_wuh",
+            "create channel hgk_cpt from branch_hkg to branch_cpt",
+            "create channel cpt_syd from branch_cpt to branch_syd",
+            "create channel syd_sfo from branch_syd to branch_sfo"};
 }

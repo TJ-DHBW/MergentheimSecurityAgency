@@ -1,19 +1,31 @@
 package msa.cql;
 
+import msa.Configuration;
 import msa.db.IMSADatabase;
+
+import java.util.HashMap;
 
 public class QueryContext {
     private final IMSADatabase database;
+    private final HashMap<String, InMemoryChannel> channelz;
 
+    private boolean debugOn;
     private String queryResult;
 
     public QueryContext(IMSADatabase database) {
         this.database = database;
+        this.channelz = new HashMap<>();
+
+        debugOn = false;
         queryResult = "";
     }
 
     public IMSADatabase getDatabase() {
         return database;
+    }
+
+    public HashMap<String, InMemoryChannel> getChannelz() {
+        return channelz;
     }
 
     public String pullQueryResult() {
@@ -33,5 +45,14 @@ public class QueryContext {
         } else {
             throw new IllegalStateException("The last queryResult has not yet been read!");
         }
+    }
+
+    public boolean isDebugOn() {
+        return debugOn;
+    }
+
+    public void toggleDebug() {
+        this.debugOn = !debugOn;
+        if (Configuration.instance.verbose) System.out.println("Debug mode is now: " + debugOn);
     }
 }

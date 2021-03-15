@@ -34,7 +34,10 @@ public class GUI extends Application {
         outputArea.setEditable(false);
 
         //TODO Make the creation of the database a bit more beautiful O.O
-        CQLManager cqlManager = new CQLManager(new HSQLDatabase());
+        HSQLDatabase database = new HSQLDatabase();
+        database.init();                                                // Fill database with available algorithms etc.
+        CQLManager cqlManager = new CQLManager(database);
+        cqlManager.handleAll(Configuration.instance.simulationQueries); // Simulation
 
         executeButton.setOnAction(event -> {
             System.out.println("[execute] pressed");
@@ -66,6 +69,21 @@ public class GUI extends Application {
         vbox.getChildren().addAll(hBox, commandLineArea, outputArea);
 
         Scene scene = new Scene(vbox, 950, 500);
+        scene.setOnKeyPressed(event -> {
+            switch (event.getCode()) {
+                case F3:
+                    if (Configuration.instance.verbose) System.out.println("F3 pressed");
+                    cqlManager.getContext().toggleDebug();
+                    break;
+                case F5:
+                    if (Configuration.instance.verbose) System.out.println("F5 pressed");
+                    executeButton.fire();
+                    break;
+                case F8:
+                    if (Configuration.instance.verbose) System.out.println("F8 pressed");
+                    //TODO implement
+            }
+        });
         primaryStage.setScene(scene);
         primaryStage.show();
     }
