@@ -179,7 +179,8 @@ public class CryptographyService {
 
         for (String jarLocation : jarLocationsOfJarsToSign) {
             File jarFile = new File(jarLocation);
-            if (!jarFile.exists()) throw new IllegalStateException("All the jars have to exist before signing.");
+            if (!jarFile.exists())
+                throw new IllegalStateException("All the jars have to exist before signing. BUILD THEM!");
 
             ProcessBuilder processBuilder = new ProcessBuilder("C:\\Program Files\\Java\\jdk-15.0.1\\bin\\jarsigner",
                     "-keystore",
