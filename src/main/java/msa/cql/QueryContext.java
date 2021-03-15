@@ -3,6 +3,7 @@ package msa.cql;
 import msa.Configuration;
 import msa.db.IMSADatabase;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class QueryContext {
@@ -11,13 +12,15 @@ public class QueryContext {
 
     private boolean debugOn;
     private String queryResult;
+    private final ArrayList<String> additionalInfo;
 
     public QueryContext(IMSADatabase database) {
         this.database = database;
         this.channelz = new HashMap<>();
 
-        debugOn = false;
-        queryResult = "";
+        this.debugOn = false;
+        this.queryResult = "";
+        this.additionalInfo = new ArrayList<>();
     }
 
     public IMSADatabase getDatabase() {
@@ -25,7 +28,7 @@ public class QueryContext {
     }
 
     public void addChannel(String channelName, InMemoryChannel channel) {
-        channel.setDatabase(database);
+        channel.setContext(this);
         channelz.put(channelName, channel);
     }
 
@@ -35,9 +38,16 @@ public class QueryContext {
 
     public String pullQueryResult() {
         if (!queryResult.equals("")) {
-            String tmp = queryResult;
+            StringBuilder ret = new StringBuilder(queryResult);
             queryResult = "";
-            return tmp;
+            if (additionalInfo.size() > 0) {
+                ret.append("\n\nAdditional Info:\n");
+                for (String info : additionalInfo) {
+                    ret.append(info).append("\n");
+                }
+                additionalInfo.clear();
+            }
+            return ret.toString();
         } else {
             //TODO Maybe this has to go. >.< We will see...
             throw new IllegalStateException("The queryResult has not been set yet!");
@@ -59,5 +69,9 @@ public class QueryContext {
     public void toggleDebug() {
         this.debugOn = !debugOn;
         if (Configuration.instance.verbose) System.out.println("Debug mode is now: " + debugOn);
+    }
+
+    public void addInfo(String info) {
+        this.additionalInfo.add(info);
     }
 }

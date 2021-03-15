@@ -1,12 +1,11 @@
 package msa.cql;
 
 import com.google.common.eventbus.Subscribe;
-import msa.db.IMSADatabase;
 import msa.db.model.Participant;
 
 public class InMemoryParticipant {
     protected Participant participant;
-    protected IMSADatabase database;
+    protected QueryContext context;
 
     protected InMemoryParticipant() {
 
@@ -28,7 +27,7 @@ public class InMemoryParticipant {
         //TODO implement
     }
 
-    public void setDatabase(IMSADatabase database) {
-        this.database = database;
+    public void setContext(QueryContext context) {
+        this.context = context;
     }
 }

@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import javax.persistence.NoResultException;
+import java.io.Serializable;
 import java.util.List;
 
 public class HSQLDatabase implements IMSADatabase {
@@ -25,13 +26,18 @@ public class HSQLDatabase implements IMSADatabase {
     }
 
     @Override
-    public void save(Object object) {
-        session.save(object);
+    public Serializable save(Object object) {
+        return session.save(object);
     }
 
     @Override
     public void delete(Object object) {
         session.delete(object);
+    }
+
+    @Override
+    public void update(Object object) {
+        session.update(object);
     }
 
     //TODO Test

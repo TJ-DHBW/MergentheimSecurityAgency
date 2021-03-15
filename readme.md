@@ -7,7 +7,7 @@
     - ~~**02** Taste \[F3], Debug-Modus~~
     - ~~**04** register participant~~
     - ~~**05** create channel~~
-    - **08** intrude channel
+    - ~~**08** intrude channel~~
     - ~~**10** encrypt message~~
     - ~~**11** decrypt message~~
     - ~~**13** Komponente shift.jar~~
