@@ -22,7 +22,7 @@ public class InMemoryIntruder extends InMemoryParticipant {
         if (sender == null) throw new IllegalStateException("The sender does not exist. Which should not be possible.");
 
         Postbox postbox = new Postbox(receiver, sender, "unknown");
-        Integer identifier = context.getDatabase().save(postbox);
+        Integer identifier = (Integer) context.getDatabase().save(postbox);
 
 
         String keyFileName = event.getKeyFileName();

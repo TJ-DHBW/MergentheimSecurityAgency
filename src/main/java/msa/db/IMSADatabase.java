@@ -5,12 +5,13 @@ import msa.db.model.Channel;
 import msa.db.model.Participant;
 import msa.db.model.Type;
 
+import java.io.Serializable;
 import java.util.List;
 
 public interface IMSADatabase {
     //TODO write some boring stuff in here.
 
-    Integer save(Object object);
+    Serializable save(Object object);
 
     void delete(Object object);
 
