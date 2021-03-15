@@ -12,7 +12,6 @@ public class CreateChannelQuery extends BaseQuery {
         super("^create channel (\\S+) from (\\S+) to (\\S+)$");
     }
 
-    //TODO Simulation
     //TODO Test
     @Override
     public void execute(MatchResult matchResult, QueryContext context) {
