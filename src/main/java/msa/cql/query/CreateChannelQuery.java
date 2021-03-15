@@ -12,7 +12,6 @@ public class CreateChannelQuery extends BaseQuery {
         super("^create channel (\\S+) from (\\S+) to (\\S+)$");
     }
 
-    //TODO Test
     @Override
     public void execute(MatchResult matchResult, QueryContext context) {
         String channelName = matchResult.group(1);
@@ -54,7 +53,7 @@ public class CreateChannelQuery extends BaseQuery {
         // Create the new Channel
         channel = new Channel(channelName, participant1, participant2);
         context.getDatabase().save(channel);
-        context.getChannelz().put(channel.getName(), new InMemoryChannel(channel));
+        context.addChannel(channel.getName(), new InMemoryChannel(channel));
         context.setQueryResult("channel " + channelName + " from " + name1 + " to " + name2 + " successfully created");
     }
 }

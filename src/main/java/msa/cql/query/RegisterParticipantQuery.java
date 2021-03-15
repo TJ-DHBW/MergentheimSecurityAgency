@@ -11,7 +11,6 @@ public class RegisterParticipantQuery extends BaseQuery {
         super("^register participant (\\S+) with type (\\S+)$");
     }
 
-    //TODO Test this
     @Override
     public void execute(MatchResult matchResult, QueryContext context) {
         Participant participant = context.getDatabase().findParticipantByName(matchResult.group(1));

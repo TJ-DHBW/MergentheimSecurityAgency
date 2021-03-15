@@ -26,7 +26,7 @@ public class IntrudeChannelQuery extends BaseQuery {
             context.setQueryResult("The channel " + channelName + " does not exist.");
             return;
         }
-        InMemoryChannel channel = context.getChannelz().get(databaseChannel.getName());
+        InMemoryChannel channel = context.getChannel(databaseChannel.getName());
 
         // Get Participant(has to be intruder)
         Participant databaseParticipant = context.getDatabase().findParticipantByName(intruderName);
