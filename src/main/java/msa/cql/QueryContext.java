@@ -24,8 +24,13 @@ public class QueryContext {
         return database;
     }
 
-    public HashMap<String, InMemoryChannel> getChannelz() {
-        return channelz;
+    public void addChannel(String channelName, InMemoryChannel channel) {
+        channel.setDatabase(database);
+        channelz.put(channelName, channel);
+    }
+
+    public InMemoryChannel getChannel(String channelName) {
+        return channelz.get(channelName);
     }
 
     public String pullQueryResult() {
