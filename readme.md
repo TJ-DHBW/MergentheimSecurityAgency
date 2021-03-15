@@ -29,7 +29,7 @@
 
 - ~~durch Drücken der Taste \[F5] wird der Befehl ausgeführt~~
 - Komponenten sind signiert
-- Nur signierte Komponenten werden geladen.
+- ~~Nur signierte Komponenten werden geladen.~~
 - Schlüssel im JSON-Format
 
 ## Personal Todos

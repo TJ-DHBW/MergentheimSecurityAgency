@@ -3,7 +3,10 @@ package msa.cql.cryptography;
 import msa.Configuration;
 import msa.cql.cryptography.interfaces.*;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.concurrent.*;
@@ -96,6 +99,7 @@ public class CryptographyService {
             default:
                 throw new IllegalArgumentException("There is no implementation for the " + algorithm + " algorithm.");
         }
+        if (!verifyJar(jarLocation)) throw new SecurityException("Jar " + jarLocation + " could not be verified!");
 
         ICryptographyAlgorithm componentPort = null;
         try {
@@ -127,6 +131,7 @@ public class CryptographyService {
             default:
                 throw new IllegalArgumentException("There is no implementation for the " + algorithm + " cracker.");
         }
+        if (!verifyJar(jarLocation)) throw new SecurityException("Jar " + jarLocation + " could not be verified!");
 
         ICryptographyCracker componentPort = null;
         try {
@@ -140,5 +145,58 @@ public class CryptographyService {
         }
 
         return componentPort;
+    }
+
+    private static boolean verifyJar(String jarLocation) {
+        File jarFile = new File(jarLocation);
+        try {
+            ProcessBuilder processBuilder = new ProcessBuilder("C:\\Program Files\\Java\\jdk-15.0.1\\bin\\jarsigner", "-verify", jarFile.getAbsolutePath());
+            Process process = processBuilder.start();
+            process.waitFor();
+
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String line;
+
+            while ((line = bufferedReader.readLine()) != null) {
+                System.out.println(line);
+                if (line.contains("verified")) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
+    public static void main(String[] args) throws InterruptedException, IOException {
+        // Execute this main, if you want to sign all used components!
+        // The components have to exist first.
+        String[] jarLocationsOfJarsToSign = new String[]{Configuration.instance.rsaJarLocation,
+                Configuration.instance.shiftJarLocation,
+                Configuration.instance.rsaCrackerJarLocation,
+                Configuration.instance.shiftCrackerJarLocation};
+
+        for (String jarLocation : jarLocationsOfJarsToSign) {
+            File jarFile = new File(jarLocation);
+            if (!jarFile.exists()) throw new IllegalStateException("All the jars have to exist before signing.");
+
+            ProcessBuilder processBuilder = new ProcessBuilder("C:\\Program Files\\Java\\jdk-15.0.1\\bin\\jarsigner",
+                    "-keystore",
+                    "signing\\keystore.jks",
+                    "-storepass",
+                    "dhbw2021",
+                    jarFile.getAbsolutePath(),
+                    "server");
+            Process process = processBuilder.start();
+            process.waitFor();
+
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String line;
+
+            while ((line = bufferedReader.readLine()) != null) {
+                System.out.println(line);
+            }
+        }
     }
 }
