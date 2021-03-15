@@ -6,6 +6,7 @@ import msa.cql.cryptography.interfaces.*;
 import java.io.File;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.concurrent.*;
 
 public class CryptographyService {
 
@@ -45,8 +46,7 @@ public class CryptographyService {
         }
     }
 
-    //TODO Test this
-    public static String crack(String encryptedMessage, String algorithm, String keyFileName) {
+    private static String crack(String encryptedMessage, String algorithm, String keyFileName) {
         if (encryptedMessage == null || algorithm == null)
             throw new IllegalArgumentException("Parameters cant be null.");
 
@@ -62,6 +62,22 @@ public class CryptographyService {
             default:
                 throw new IllegalArgumentException("There is no implementation for the " + algorithm + " cracker.");
         }
+    }
+
+    //TODO Test this
+    public static String crack(String encryptedMessage, String algorithm, String keyFileName, int seconds) {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        Future<String> future = executor.submit(() -> CryptographyService.crack(encryptedMessage, algorithm, keyFileName));
+        try {
+            return future.get(seconds, TimeUnit.SECONDS);
+        } catch (TimeoutException e) {
+            future.cancel(true);
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException("Something in the cracker went wrong.");
+        } finally {
+            executor.shutdownNow();
+        }
+        return null;
     }
 
     //TODO Test this
