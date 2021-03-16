@@ -41,4 +41,8 @@ public class InMemoryChannel {
             intruder.setContext(context);
         }
     }
+
+    public EventBus getEventBus() {
+        return eventBus;
+    }
 }

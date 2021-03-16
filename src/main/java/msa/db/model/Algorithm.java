@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "algorithms")
-public class Algorithm {
+public class  Algorithm {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

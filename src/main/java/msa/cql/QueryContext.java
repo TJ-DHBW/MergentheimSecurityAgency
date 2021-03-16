@@ -3,6 +3,7 @@ package msa.cql;
 import msa.Configuration;
 import msa.db.IMSADatabase;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -73,5 +74,34 @@ public class QueryContext {
 
     public void addInfo(String info) {
         this.additionalInfo.add(info);
+    }
+
+    public HashMap<String, InMemoryChannel> getChannelz() {
+        return channelz;
+    }
+
+    public void displayMostCurrentLogFile() {
+        File directory = new File(Configuration.instance.logFileFolder);
+        File[] files = directory.listFiles(File::isFile);
+        long lastModifiedTime = Long.MIN_VALUE;
+        File chosenFile = null;
+        if (files != null) {
+            for (File file : files) {
+                if (file.lastModified() > lastModifiedTime) {
+                    chosenFile = file;
+                }
+            }
+        }
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(chosenFile)));
+            StringBuilder stringBuilder = new StringBuilder();
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                stringBuilder.append(line);
+            }
+            this.setQueryResult(stringBuilder.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

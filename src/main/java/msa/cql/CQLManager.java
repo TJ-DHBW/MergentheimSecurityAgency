@@ -21,6 +21,11 @@ public class CQLManager {
         queries.add(new IntrudeChannelQuery());
         queries.add(new EncryptQuery());
         queries.add(new DecryptQuery());
+        queries.add(new DropChannelQuery());
+        queries.add(new SendQuery());
+        queries.add(new ShowChannelQuery());
+        queries.add(new CrackShiftQuery());
+        queries.add(new CrackRSAQuery());
         //TODO add all the queries to the List ^-^
     }
 
