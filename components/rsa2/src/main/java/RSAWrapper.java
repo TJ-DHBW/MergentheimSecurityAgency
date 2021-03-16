@@ -1,5 +1,6 @@
 import java.io.*;
 import java.math.BigInteger;
+import java.util.Base64;
 
 import msa.cql.cryptography.interfaces.IRSAAlgorithm;
 import org.json.JSONObject;
@@ -16,17 +17,16 @@ public class RSAWrapper {
         Key key = extractKeyFromKeyFile(keyFile, false);
 
         BigInteger plainMessageAsNumber = Utility.stringToNumber(plainMessage);
-
-        return String.valueOf(plainMessageAsNumber.modPow(key.getE(), key.getN()));
+        return Base64.getEncoder().encodeToString((plainMessageAsNumber.modPow(key.getE(), key.getN()).toByteArray()));
     }
 
     public String innerDecrypt(String encryptedMessage, File keyFile) {
         Key key = extractKeyFromKeyFile(keyFile, true);
         if (key == null) throw new IllegalStateException("Problem with the keyFile");
 
-        BigInteger encryptedMessageAsNumber = new BigInteger(encryptedMessage);
-
-        return String.valueOf(encryptedMessageAsNumber.modPow(key.getE(), key.getN()));
+        BigInteger encryptedMessageAsNumber = new BigInteger(Base64.getDecoder().decode(encryptedMessage));
+        BigInteger decryptedMessageAsNumber = encryptedMessageAsNumber.modPow(key.getE(), key.getN());
+        return Utility.numberToString(decryptedMessageAsNumber);
     }
 
     //TODO check if works, implement in other algorithms
@@ -40,12 +40,12 @@ public class RSAWrapper {
             }
             JSONObject keyFileJonObject = new JSONObject(fileContent.toString());
             if(privateKey){
-                return new Key(new BigInteger(String.valueOf(keyFileJonObject.getJSONObject("n"))),
-                        new BigInteger(String.valueOf(keyFileJonObject.getJSONObject("d"))));
+                return new Key(new BigInteger(String.valueOf(keyFileJonObject.getBigInteger("n"))),
+                        new BigInteger(String.valueOf(keyFileJonObject.getBigInteger("d"))));
             }
             else{
-                return new Key(new BigInteger(String.valueOf(keyFileJonObject.getJSONObject("n"))),
-                        new BigInteger(String.valueOf(keyFileJonObject.getJSONObject("e"))));
+                return new Key(new BigInteger(String.valueOf(keyFileJonObject.getBigInteger("n"))),
+                        new BigInteger(String.valueOf(keyFileJonObject.getBigInteger("e"))));
             }
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,5 +1,6 @@
 import java.io.*;
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 import msa.cql.cryptography.interfaces.IRSAAlgorithm;
@@ -18,8 +19,9 @@ public class RSAWrapper {
         if (key == null) throw new IllegalStateException("Problem with the keyFile");
 
         Cipher rsaCipher = new Cipher();
-
-        return Base64.getEncoder().encodeToString(rsaCipher.encrypt(plainMessage, key));
+        byte[] encryption = rsaCipher.encrypt(plainMessage, key);
+        String test = Base64.getEncoder().encodeToString(encryption);
+        return Base64.getEncoder().encodeToString(encryption);
     }
 
     public String innerDecrypt(String encryptedMessage, File privateKeyFile) {
@@ -27,8 +29,9 @@ public class RSAWrapper {
         if (key == null) throw new IllegalStateException("Problem with the keyFile");
 
         Cipher rsaCipher = new Cipher();
-
-        return rsaCipher.decrypt(encryptedMessage.getBytes(), key);
+        byte[] decryption = Base64.getDecoder().decode(encryptedMessage);
+        String test = rsaCipher.decrypt(decryption, key);
+        return rsaCipher.decrypt(decryption, key);
     }
 
     //TODO check if works, implement in other algorithms
@@ -42,12 +45,12 @@ public class RSAWrapper {
             }
             JSONObject keyFileJonObject = new JSONObject(fileContent.toString());
             if(privateKey){
-                return new Key(new BigInteger(String.valueOf(keyFileJonObject.getInt("n"))),
-                        new BigInteger(String.valueOf(keyFileJonObject.getInt("d"))));
+                return new Key(new BigInteger(String.valueOf(keyFileJonObject.getBigInteger("n"))),
+                        new BigInteger(String.valueOf(keyFileJonObject.getBigInteger("d"))));
             }
             else{
-                return new Key(new BigInteger(String.valueOf(keyFileJonObject.getInt("n"))),
-                        new BigInteger(String.valueOf(keyFileJonObject.getInt("e"))));
+                return new Key(new BigInteger(String.valueOf(keyFileJonObject.getBigInteger("n"))),
+                        new BigInteger(String.valueOf(keyFileJonObject.getBigInteger("e"))));
             }
         } catch (IOException e) {
             e.printStackTrace();

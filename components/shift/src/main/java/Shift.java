@@ -1,4 +1,5 @@
 import msa.cql.cryptography.interfaces.IShiftAlgorithm;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -34,7 +35,7 @@ public class Shift {
         return caesarCipher.decrypt(encryptedMessage);
     }
 
-    //TODO make this actually good.
+    //TODO test
     private String extractKeyFromKeyFile(File keyFile) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(keyFile));
@@ -43,10 +44,10 @@ public class Shift {
             while ((line = reader.readLine()) != null) {
                 fileContent.append(line);
             }
-            String rightSide = fileContent.toString().split(":")[1];
-            if (rightSide.indexOf("\"") != rightSide.lastIndexOf("\"") && rightSide.lastIndexOf("\"") != -1) {
-                return rightSide.substring(rightSide.indexOf("\"") + 1, rightSide.lastIndexOf("\""));
-            }
+            JSONObject keyFileJonObject = new JSONObject(fileContent.toString());
+
+            return String.valueOf(keyFileJonObject.getInt("key"));
+
         } catch (IOException e) {
             e.printStackTrace();
         }

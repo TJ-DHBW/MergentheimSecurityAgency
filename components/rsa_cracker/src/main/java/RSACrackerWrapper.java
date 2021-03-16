@@ -1,10 +1,12 @@
 import msa.cql.cryptography.interfaces.IRSACracker;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigInteger;
+import java.security.Key;
 
 //TODO Test this
 public class RSACrackerWrapper {
@@ -30,7 +32,7 @@ public class RSACrackerWrapper {
         }
     }
 
-    //TODO make this actually good.
+    //TODO test
     private BigInteger[] extractKeyFromKeyFile(File keyFile) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(keyFile));
@@ -39,20 +41,9 @@ public class RSACrackerWrapper {
             while ((line = reader.readLine()) != null) {
                 fileContent.append(line);
             }
+            JSONObject keyFileJonObject = new JSONObject(fileContent.toString());
+            return new BigInteger[]{new BigInteger(String.valueOf(keyFileJonObject.getInt("n"))), new BigInteger(String.valueOf(keyFileJonObject.getInt("e")))};
 
-            String[] splitFile = fileContent.toString().split(",");
-            splitFile[0] = splitFile[0].split(":")[1];
-            splitFile[1] = splitFile[1].split(":")[1];
-
-            BigInteger[] ret = new BigInteger[2];
-
-            if (splitFile[0].indexOf("\"") != splitFile[0].lastIndexOf("\"") && splitFile[0].lastIndexOf("\"") != -1) {
-                ret[0] = new BigInteger(splitFile[0].substring(splitFile[0].indexOf("\"") + 1, splitFile[0].lastIndexOf("\"")));
-                if (splitFile[1].indexOf("\"") != splitFile[1].lastIndexOf("\"") && splitFile[1].lastIndexOf("\"") != -1) {
-                    ret[1] = new BigInteger(splitFile[1].substring(splitFile[1].indexOf("\"") + 1, splitFile[1].lastIndexOf("\"")));
-                    return ret;
-                }
-            }
         } catch (IOException e) {
             e.printStackTrace();
         }

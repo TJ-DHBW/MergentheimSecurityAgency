@@ -31,7 +31,7 @@ task customFatJar(type: Jar) {
     manifest {
         attributes 'Main-Class': 'Application'
     }
-    baseName = 'rsa'
+    project.archivesBaseName = "rsa"
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
 }

@@ -24,3 +24,12 @@ task build_jar(type: Jar) {
     from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
 }
+
+task customFatJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'Application'
+    }
+    project.archivesBaseName = "rsa"
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
