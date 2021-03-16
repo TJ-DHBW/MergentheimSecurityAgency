@@ -14,7 +14,7 @@ public class CrackShiftQuery extends BaseQuery{
     //TODO test if works
     @Override
     public void execute(MatchResult matchResult, QueryContext context) {
-        String plainText = CryptographyService.crack(matchResult.group(1), "shift", matchResult.group(2), 30);
+        String plainText = CryptographyService.crack(matchResult.group(1), "shift", null, 30);
         if (context.isDebugOn())
             Logger.logCrack(matchResult.group(1), plainText, "SHIFT", matchResult.group(2));
         context.setQueryResult(plainText);

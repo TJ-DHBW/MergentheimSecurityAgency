@@ -1,7 +1,7 @@
 import java.io.*;
 import java.math.BigInteger;
 
-import msa.cpl.cryptography.interfaces.IRSAAlgorithm;
+import msa.cql.cryptography.interfaces.IRSAAlgorithm;
 import org.json.JSONObject;
 
 public class RSAWrapper {

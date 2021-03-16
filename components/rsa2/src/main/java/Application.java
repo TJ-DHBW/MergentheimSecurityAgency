@@ -39,6 +39,7 @@ public class Application {
         String plainText = "hello";
         BigInteger plainTextNumber = Utility.stringToNumber(plainText);
 
+
         System.out.println();
 
         System.out.println("p                        : " + application.p);

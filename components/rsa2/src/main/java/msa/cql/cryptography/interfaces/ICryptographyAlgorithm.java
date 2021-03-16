@@ -1,4 +1,4 @@
-package msa.cpl.cryptography.interfaces;
+package msa.cql.cryptography.interfaces;
 
 public interface ICryptographyAlgorithm {
 }

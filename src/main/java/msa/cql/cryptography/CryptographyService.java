@@ -168,8 +168,16 @@ public class CryptographyService {
         }
         return false;
     }
-
     public static void main(String[] args) throws InterruptedException, IOException {
+        //String test = CryptographyService.encrypt("hallo", "shift", "shift_key.json");
+
+        String test = CryptographyService.crack("helllo", "shift", null);
+        System.out.println(test);
+        String test2 = CryptographyService.encrypt("hallo", "rsa", "rsa_key_public.json");
+        System.out.println(test2);
+    }
+
+    /*public static void main(String[] args) throws InterruptedException, IOException {
         // Execute this main, if you want to sign all used components!
         // The components have to exist first.
         String[] jarLocationsOfJarsToSign = new String[]{Configuration.instance.rsaJarLocation,
@@ -199,5 +207,5 @@ public class CryptographyService {
                 System.out.println(line);
             }
         }
-    }
+    }*/
 }
