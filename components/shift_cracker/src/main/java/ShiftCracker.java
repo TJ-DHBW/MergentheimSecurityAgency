@@ -98,14 +98,17 @@ public class ShiftCracker {
         for (char character : finalProcess) {
             stringBuilder.append(character);
         }
+        stringBuilder.append("\n");
 
-        if (eFrequency / frequency >= 0.05 || aFrequency / frequency >= 0.05 || iFrequency / frequency >= 0.05 || oFrequency / frequency >= 0.05 || uFrequency / frequency >= 0.05) {
+        /*if (eFrequency / frequency >= 0.05 || aFrequency / frequency >= 0.05 || iFrequency / frequency >= 0.05 || oFrequency / frequency >= 0.05 || uFrequency / frequency >= 0.05) {
             stringBuilder.append("\t\tA : ").append(decimalFormat.format(aFrequency / frequency));
             stringBuilder.append("\t\tE : ").append(decimalFormat.format(eFrequency / frequency));
             stringBuilder.append("\t\tI : ").append(decimalFormat.format(iFrequency / frequency));
             stringBuilder.append("\t\tO : ").append(decimalFormat.format(oFrequency / frequency));
             stringBuilder.append("\t\tU : ").append(decimalFormat.format(uFrequency / frequency));
-        }
+
+            stringBuilder.append("\n");
+        }*/
         return stringBuilder.toString();
     }
 }

@@ -42,12 +42,12 @@ public class RSAWrapper {
             }
             JSONObject keyFileJonObject = new JSONObject(fileContent.toString());
             if(privateKey){
-                return new Key(new BigInteger(String.valueOf(keyFileJonObject.getJSONObject("n"))),
-                        new BigInteger(String.valueOf(keyFileJonObject.getJSONObject("d"))));
+                return new Key(new BigInteger(String.valueOf(keyFileJonObject.getInt("n"))),
+                        new BigInteger(String.valueOf(keyFileJonObject.getInt("d"))));
             }
             else{
-                return new Key(new BigInteger(String.valueOf(keyFileJonObject.getJSONObject("n"))),
-                        new BigInteger(String.valueOf(keyFileJonObject.getJSONObject("e"))));
+                return new Key(new BigInteger(String.valueOf(keyFileJonObject.getInt("n"))),
+                        new BigInteger(String.valueOf(keyFileJonObject.getInt("e"))));
             }
         } catch (IOException e) {
             e.printStackTrace();

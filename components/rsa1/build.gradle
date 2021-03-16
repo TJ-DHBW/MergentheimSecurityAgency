@@ -27,6 +27,15 @@ task build_jar(type: Jar) {
     with jar
 }
 
+task customFatJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'Application'
+    }
+    baseName = 'rsa'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
 test {
     useJUnitPlatform()
 }
