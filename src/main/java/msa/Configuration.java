@@ -5,6 +5,8 @@ public enum Configuration {
 
     // Toggles detailed console output on or off.
     public final boolean verbose = true;
+    //TODO enable this
+    public final boolean onlyLoadSignedJars = false;
 
 
     // FolderLocations
