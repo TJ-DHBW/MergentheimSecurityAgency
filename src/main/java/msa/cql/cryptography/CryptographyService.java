@@ -99,7 +99,8 @@ public class CryptographyService {
             default:
                 throw new IllegalArgumentException("There is no implementation for the " + algorithm + " algorithm.");
         }
-        if (!verifyJar(jarLocation)) throw new SecurityException("Jar " + jarLocation + " could not be verified!");
+        if (Configuration.instance.onlyLoadSignedJars && !verifyJar(jarLocation))
+            throw new SecurityException("Jar " + jarLocation + " could not be verified!");
 
         ICryptographyAlgorithm componentPort = null;
         try {
@@ -131,7 +132,8 @@ public class CryptographyService {
             default:
                 throw new IllegalArgumentException("There is no implementation for the " + algorithm + " cracker.");
         }
-        if (!verifyJar(jarLocation)) throw new SecurityException("Jar " + jarLocation + " could not be verified!");
+        if (Configuration.instance.onlyLoadSignedJars && !verifyJar(jarLocation))
+            throw new SecurityException("Jar " + jarLocation + " could not be verified!");
 
         ICryptographyCracker componentPort = null;
         try {
