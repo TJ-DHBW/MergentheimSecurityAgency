@@ -5,14 +5,15 @@ import msa.cql.cryptography.CryptographyService;
 import msa.db.model.Participant;
 import msa.db.model.Postbox;
 
-public class InMemoryIntruder extends InMemoryParticipant {
+public class InMemoryIntruder {
+    protected Participant participant;
+    protected QueryContext context;
 
     public InMemoryIntruder(Participant participant) {
         this.participant = participant;
     }
 
     //TODO Test this
-    @Override
     @Subscribe
     public void receive(MessageEvent event) {
         Participant receiver = context.getDatabase().findParticipantByName(participant.getName());
@@ -37,5 +38,9 @@ public class InMemoryIntruder extends InMemoryParticipant {
         } else {
             context.addInfo("intruder " + participant.getName() + " | crack message from participant " + sender.getName() + " failed");
         }
+    }
+
+    public void setContext(QueryContext context) {
+        this.context = context;
     }
 }
