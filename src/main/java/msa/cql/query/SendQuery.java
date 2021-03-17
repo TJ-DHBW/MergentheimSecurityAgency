@@ -26,8 +26,20 @@ public class SendQuery extends BaseQuery{
         String keyFilePrivate = matchResult.group(5);
         String keyFilePublic = keyFilePrivate.replaceAll(".txt", "_public.txt");
         Channel channel = context.getDatabase().findChannelByParticipants(sender, receiver);
+        //TODO check if necessary
         if(channel == null){
-            context.setQueryResult("no valid channel from "+sender.getName()+" to "+receiver.getName());
+            channel = context.getDatabase().findChannelByParticipants(receiver, sender);
+        }
+        if(sender == null){
+            context.setQueryResult("sender does not exist");
+            return;
+        }
+        if(receiver == null){
+            context.setQueryResult("receiver does not exist");
+            return;
+        }
+        if(channel == null){
+            context.setQueryResult("no valid channel from " + sender.getName() + " to " + receiver.getName());
             return;
         }
         String encryptedMessage = CryptographyService.encrypt(message, algorithm, keyFilePublic);
