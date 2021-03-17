@@ -93,6 +93,7 @@ public class QueryContext {
             }
         }
         try {
+            assert chosenFile != null;
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(chosenFile)));
             StringBuilder stringBuilder = new StringBuilder();
             String line;

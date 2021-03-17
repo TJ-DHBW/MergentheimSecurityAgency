@@ -26,14 +26,30 @@ public class InMemoryParticipant {
 
     @Subscribe
     public void receive(MessageEvent event) {
-        Participant receiver = context.getDatabase().findParticipantByName(event.getReceiverName());
-        if(this.participant == context.getDatabase().findParticipantByName(event.getReceiverName())){
+        if(context == null){
+            System.out.println("context is null");
+        }
+        if(context.getDatabase() == null){
+            System.out.println("db is null");
+            return;
+        }
+        this.participant = context.getDatabase().findParticipantByName(event.getReceiverName());
+        if(this.participant == null){
+            System.out.println("participant did not get from db");
+        }
+        if(this.participant.getName() == event.getReceiverName()){
             String message = CryptographyService.decrypt(event.getEncryptedMessage(), event.getAlgorithm(), event.getKeyFileName());
-            Postbox postbox = new Postbox(receiver, context.getDatabase().findParticipantByName(event.getSenderName()), message);
+            if(message == null || message.equals("")){
+                System.out.println("message null");
+            }
+            Postbox postbox = new Postbox(this.participant, context.getDatabase().findParticipantByName(event.getSenderName()), message);
             //TODO check if postbox is supposed to be like this
             context.getDatabase().save(postbox);
             context.setQueryResult(participant.getName()+" received new message");
+            //context.setQueryResult("blaa");
         }
+        //TODO remove
+        System.out.println("participant got it");
     }
 
     public void setContext(QueryContext context) {

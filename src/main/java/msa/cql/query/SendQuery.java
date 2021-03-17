@@ -44,6 +44,7 @@ public class SendQuery extends BaseQuery{
         }
         String encryptedMessage = CryptographyService.encrypt(message, algorithm, keyFilePublic);
         InMemoryChannel inMemoryChannel = new InMemoryChannel(channel);
+        inMemoryChannel.setContext(context);
         MessageEvent messageEvent = new MessageEvent(encryptedMessage, algorithm, keyFilePrivate, sender.getName(), receiver.getName());
         inMemoryChannel.getEventBus().post(messageEvent);
         Algorithm algorithmClass =  context.getDatabase().findAlgorithmByName(algorithm);

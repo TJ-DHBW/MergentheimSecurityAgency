@@ -18,6 +18,9 @@ public class CryptographyService {
             throw new IllegalArgumentException("Parameters cant be null.");
 
         //TODO Test this
+        if(!keyFileName.contains("_public")) {
+            keyFileName = keyFileName.replaceAll(".json", "_public.json");
+        }
         File keyFile = new File(Configuration.instance.keyFileFolder + Configuration.instance.fileSeparator + keyFileName);
         ICryptographyAlgorithm cryptoAlgorithm = getAlgorithmImplementationByString(algorithm);
 

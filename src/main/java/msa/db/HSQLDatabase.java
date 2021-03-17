@@ -5,6 +5,7 @@ import msa.db.model.Channel;
 import msa.db.model.Participant;
 import msa.db.model.Type;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import javax.persistence.NoResultException;
@@ -27,17 +28,26 @@ public class HSQLDatabase implements IMSADatabase {
 
     @Override
     public Serializable save(Object object) {
-        return session.save(object);
+        Transaction transaction = session.beginTransaction();
+        Serializable returnOfSave = session.save(object);
+        transaction.commit();
+        return returnOfSave;
     }
 
     @Override
     public void delete(Object object) {
+        Transaction transaction = session.beginTransaction();
         session.delete(object);
+        transaction.commit();
+        return;
     }
 
     @Override
     public void update(Object object) {
+        Transaction transaction = session.beginTransaction();
         session.update(object);
+        transaction.commit();
+        return;
     }
 
     //TODO Test
@@ -118,6 +128,11 @@ public class HSQLDatabase implements IMSADatabase {
     //TODO Test
     @Override
     public List<Channel> getAllChannel() {
+        //TODO remove
+        List<Channel> test = session.createQuery("FROM Channel", Channel.class).list();
+        for(Channel channel : test){
+            System.out.println(channel.getName()+channel.getParticipant1()+channel.getParticipant2());
+        }
         return session.createQuery("FROM Channel", Channel.class).list();
     }
 }
