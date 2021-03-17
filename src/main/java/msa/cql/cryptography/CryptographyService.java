@@ -17,7 +17,7 @@ public class CryptographyService {
         if (plainMessage == null || algorithm == null || keyFileName == null)
             throw new IllegalArgumentException("Parameters cant be null.");
 
-        if(!keyFileName.contains("_public")) {
+        if(algorithm.equals("rsa") && !keyFileName.contains("_public")) {
             keyFileName = keyFileName.replaceAll(".json", "_public.json");
         }
         File keyFile = new File(Configuration.instance.keyFileFolder + Configuration.instance.fileSeparator + keyFileName);
