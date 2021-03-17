@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigInteger;
-import java.security.Key;
+import java.util.Base64;
 
 //TODO Test this
 public class RSACrackerWrapper {
@@ -21,7 +21,7 @@ public class RSACrackerWrapper {
         BigInteger[] key = extractKeyFromKeyFile(publicKeyFile);
         if (key == null) throw new IllegalStateException("Problem with the keyFile");
 
-        RSACracker rsaCracker = new RSACracker(key[0], key[1], new BigInteger(encryptedMessage));
+        RSACracker rsaCracker = new RSACracker(key[1], key[0], new BigInteger(Base64.getDecoder().decode(encryptedMessage)));
 
         try {
             BigInteger cypher = rsaCracker.execute();
@@ -42,7 +42,7 @@ public class RSACrackerWrapper {
                 fileContent.append(line);
             }
             JSONObject keyFileJonObject = new JSONObject(fileContent.toString());
-            return new BigInteger[]{new BigInteger(String.valueOf(keyFileJonObject.getInt("n"))), new BigInteger(String.valueOf(keyFileJonObject.getInt("e")))};
+            return new BigInteger[]{keyFileJonObject.getBigInteger("n"), keyFileJonObject.getBigInteger("e")};
 
         } catch (IOException e) {
             e.printStackTrace();

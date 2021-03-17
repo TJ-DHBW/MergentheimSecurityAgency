@@ -50,9 +50,9 @@ test {
  */
 
 /*
-run.dependsOn('rsa1:jar')
-run.dependsOn('rsa2:jar')
-run.dependsOn('rsa_cracker:jar')
-run.dependsOn('shift:jar')
+run.dependsOn('rsa1:customFatJar')
+run.dependsOn('rsa2:customFatJar')
+run.dependsOn('rsa_cracker:customFatJar')
+run.dependsOn('shift:customFatJar')
 run.dependsOn('shift_cracker:jar')
  */
