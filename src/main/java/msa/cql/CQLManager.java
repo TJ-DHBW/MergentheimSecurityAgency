@@ -65,12 +65,11 @@ public class CQLManager {
             for (File file : files) {
                 Pattern pattern = Pattern.compile("(encrypt|decrypt|crack)_([^_]*)_([^_]*).txt");
                 Matcher m = pattern.matcher(file.getName());
-                boolean matches = m.matches();
-                System.out.println(matches);
+                m.matches();
                 Long lastModified = Long.parseLong(m.group(3));
                 if (lastModified > lastModifiedTime) {
                     chosenFile = file;
-                    lastModifiedTime = file.lastModified();
+                    lastModifiedTime = lastModified;
                 }
             }
         }
