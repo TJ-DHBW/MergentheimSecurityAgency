@@ -19,7 +19,7 @@ public class Postbox {
     private Participant participantTo;
 
     @ManyToOne
-    @JoinColumn(name = "participant_from_id", unique = true)
+    @JoinColumn(name = "participant_from_id")
     private Participant participantFrom;
 
     @Column(name = "message")
@@ -39,11 +39,7 @@ public class Postbox {
         this.timestamp = Math.toIntExact(Instant.now().getEpochSecond());
     }
 
-    public Postbox(Integer id, Participant participantTo, Participant participantFrom, String message) {
+    public void setId(Integer id) {
         this.id = id;
-        this.participantTo = participantTo;
-        this.participantFrom = participantFrom;
-        this.message = message;
-        this.timestamp = Math.toIntExact(Instant.now().getEpochSecond());
     }
 }

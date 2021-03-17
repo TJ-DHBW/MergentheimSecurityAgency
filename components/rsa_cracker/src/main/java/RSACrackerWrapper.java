@@ -42,7 +42,7 @@ public class RSACrackerWrapper {
                 fileContent.append(line);
             }
             JSONObject keyFileJonObject = new JSONObject(fileContent.toString());
-            return new BigInteger[]{new BigInteger(String.valueOf(keyFileJonObject.getInt("n"))), new BigInteger(String.valueOf(keyFileJonObject.getInt("e")))};
+            return new BigInteger[]{new BigInteger(String.valueOf(keyFileJonObject.getBigInteger("n"))), new BigInteger(String.valueOf(keyFileJonObject.getBigInteger("e")))};
 
         } catch (IOException e) {
             e.printStackTrace();

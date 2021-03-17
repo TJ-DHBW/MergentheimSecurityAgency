@@ -30,7 +30,8 @@ public class InMemoryIntruder extends InMemoryParticipant {
         String crackedMessage = CryptographyService.crack(event.getEncryptedMessage(), event.getAlgorithm(), keyFileName, 30);
 
         if (crackedMessage != null) {
-            Postbox postboxUpdated = new Postbox(identifier, receiver, sender, crackedMessage);
+            Postbox postboxUpdated = new Postbox(receiver, sender, crackedMessage);
+            postboxUpdated.setId(identifier);
             context.getDatabase().update(postboxUpdated);
             context.addInfo("intruder " + participant.getName() + " cracked message from participant " + event.getSenderName() + " | " + crackedMessage);
         } else {

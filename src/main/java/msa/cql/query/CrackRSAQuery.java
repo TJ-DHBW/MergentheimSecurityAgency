@@ -18,6 +18,11 @@ public class CrackRSAQuery extends BaseQuery{
         String plainText = CryptographyService.crack(matchResult.group(1), "rsa", matchResult.group(2), 30);
         if (context.isDebugOn())
             Logger.logCrack(matchResult.group(1), plainText, "RSA", matchResult.group(2));
-        context.setQueryResult(plainText);
+        if(plainText == null){
+            context.setQueryResult("");
+        }
+        else {
+            context.setQueryResult(plainText);
+        }
     }
 }

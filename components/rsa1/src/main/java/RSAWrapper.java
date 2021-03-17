@@ -20,7 +20,6 @@ public class RSAWrapper {
 
         Cipher rsaCipher = new Cipher();
         byte[] encryption = rsaCipher.encrypt(plainMessage, key);
-        String test = Base64.getEncoder().encodeToString(encryption);
         return Base64.getEncoder().encodeToString(encryption);
     }
 
@@ -30,7 +29,6 @@ public class RSAWrapper {
 
         Cipher rsaCipher = new Cipher();
         byte[] decryption = Base64.getDecoder().decode(encryptedMessage);
-        String test = rsaCipher.decrypt(decryption, key);
         return rsaCipher.decrypt(decryption, key);
     }
 

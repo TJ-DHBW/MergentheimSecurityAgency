@@ -41,8 +41,11 @@ public class Logger {
     }
 
     public static void logCrack(String encryptedMessage, String plainMessage, String algorithm, String keyFile){
-        String key = readWholeFile(new File(Configuration.instance.keyFileFolder + Configuration.instance.fileSeparator + keyFile));
-        key = key.replace("\n", "");
+        String key = "no key given";
+        if(keyFile!=null && keyFile != "") {
+            key = readWholeFile(new File(Configuration.instance.keyFileFolder + Configuration.instance.fileSeparator + keyFile));
+            key = key.replace("\n", "");
+        }
 
         String fileName = "crack_" + algorithm + "_" + Instant.now().getEpochSecond() + ".txt";
         String content = "+++++Crack+++++\n" +

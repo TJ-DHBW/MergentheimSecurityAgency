@@ -19,7 +19,7 @@ public enum Configuration {
     public final String componentsFolder = "components";
     public final String jarSubfolder = "build" + fileSeparator + "libs";
 
-    public final String rsaVariant = "2";
+    public final String rsaVariant = "1";
     public final String rsaJarLocation = componentsFolder + fileSeparator + "rsa" + rsaVariant + fileSeparator + jarSubfolder + fileSeparator + "rsa.jar";
     public final String rsaCrackerJarLocation = componentsFolder + fileSeparator + "rsa_cracker" + fileSeparator + jarSubfolder + fileSeparator + "rsa_cracker.jar";
     public final String shiftJarLocation = componentsFolder + fileSeparator + "shift" + fileSeparator + jarSubfolder + fileSeparator + "shift.jar";

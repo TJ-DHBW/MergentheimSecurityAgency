@@ -16,7 +16,13 @@ public class CrackShiftQuery extends BaseQuery{
     public void execute(MatchResult matchResult, QueryContext context) {
         String plainText = CryptographyService.crack(matchResult.group(1), "shift", null, 30);
         if (context.isDebugOn())
-            Logger.logCrack(matchResult.group(1), plainText, "SHIFT", matchResult.group(1));
+            Logger.logCrack(matchResult.group(1), plainText, "SHIFT", null);
         context.setQueryResult(plainText);
+        if(plainText == null){
+            context.setQueryResult("");
+        }
+        else {
+            context.setQueryResult(plainText);
+        }
     }
 }

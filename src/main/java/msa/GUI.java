@@ -81,7 +81,9 @@ public class GUI extends Application {
                     break;
                 case F8:
                     if (Configuration.instance.verbose) System.out.println("F8 pressed");
-                    cqlManager.getContext().displayMostCurrentLogFile();
+                    cqlManager.displayMostCurrentLogFile();
+                    outputArea.setText(cqlManager.getContext().pullQueryResult());
+                    break;
             }
         });
         primaryStage.setScene(scene);

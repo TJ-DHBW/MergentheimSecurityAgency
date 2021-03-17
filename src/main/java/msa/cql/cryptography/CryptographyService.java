@@ -173,7 +173,8 @@ public class CryptographyService {
         }
         return false;
     }
-    public static void main(String[] args) throws InterruptedException, IOException {
+    //TODO remove before handing in
+    public static void fmain(String[] args) throws InterruptedException, IOException {
         String testRSA = CryptographyService.encrypt("hallo", "rsa", "rsa_key_public.json");
         System.out.println(testRSA);
         String decryptedRSA = CryptographyService.decrypt(testRSA, "rsa", "rsa_key.json");
@@ -186,8 +187,8 @@ public class CryptographyService {
         String decrypted = CryptographyService.decrypt(test2, "shift", "shift_key.json");
         System.out.println(decrypted);
     }
-
-    public static void fmain(String[] args) throws InterruptedException, IOException {
+    //TODO remove before handing in
+    public static void main(String[] args) throws InterruptedException, IOException {
         // Execute this main, if you want to sign all used components!
         // The components have to exist first.
         String[] jarLocationsOfJarsToSign = new String[]{Configuration.instance.rsaJarLocation,

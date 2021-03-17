@@ -33,11 +33,10 @@ public class InMemoryParticipant {
             System.out.println("db is null");
             return;
         }
-        this.participant = context.getDatabase().findParticipantByName(event.getReceiverName());
         if(this.participant == null){
             System.out.println("participant did not get from db");
         }
-        if(this.participant.getName() == event.getReceiverName()){
+        if(this.participant.getName().equals(event.getReceiverName())){
             String message = CryptographyService.decrypt(event.getEncryptedMessage(), event.getAlgorithm(), event.getKeyFileName());
             if(message == null || message.equals("")){
                 System.out.println("message null");
@@ -46,10 +45,7 @@ public class InMemoryParticipant {
             //TODO check if postbox is supposed to be like this
             context.getDatabase().save(postbox);
             context.setQueryResult(participant.getName()+" received new message");
-            //context.setQueryResult("blaa");
         }
-        //TODO remove
-        System.out.println("participant got it");
     }
 
     public void setContext(QueryContext context) {
