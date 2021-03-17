@@ -18,7 +18,7 @@ public class CrackRSAQuery extends BaseQuery{
         if (context.isDebugOn())
             Logger.logCrack(matchResult.group(1), plainText, "RSA", matchResult.group(2));
         if(plainText == null){
-            context.setQueryResult("");
+            context.setQueryResult("cracking encrypted message "+matchResult.group(1)+" failed");
         }
         else {
             context.setQueryResult(plainText);

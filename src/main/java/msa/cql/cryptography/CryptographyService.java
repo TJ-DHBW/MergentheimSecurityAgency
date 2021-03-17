@@ -76,7 +76,7 @@ public class CryptographyService {
         } catch (TimeoutException e) {
             future.cancel(true);
         } catch (InterruptedException | ExecutionException e) {
-            throw new RuntimeException("Something in the cracker went wrong.");
+            throw new RuntimeException("Something in the cracker went wrong: "+e.getMessage());
         } finally {
             executor.shutdownNow();
         }
