@@ -39,7 +39,7 @@ public class Postbox {
         this.timestamp = Math.toIntExact(Instant.now().getEpochSecond());
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

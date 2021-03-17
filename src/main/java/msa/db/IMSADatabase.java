@@ -14,7 +14,7 @@ public interface IMSADatabase {
 
     void delete(Object object);
 
-    void update(Object object);
+    void updateMessage(Integer id, String message);
 
     Algorithm findAlgorithmByName(String name);
 

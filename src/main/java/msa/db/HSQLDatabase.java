@@ -1,9 +1,6 @@
 package msa.db;
 
-import msa.db.model.Algorithm;
-import msa.db.model.Channel;
-import msa.db.model.Participant;
-import msa.db.model.Type;
+import msa.db.model.*;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -43,11 +40,21 @@ public class HSQLDatabase implements IMSADatabase {
     }
 
     @Override
-    public void update(Object object) {
+    public void updateMessage(Integer id, String message) {
         Transaction transaction = session.beginTransaction();
-        session.update(object);
+        String queryString = "FROM Postbox P WHERE P.id = :id";
+        Query<Postbox> query = session.createQuery(queryString, Postbox.class);
+        query.setParameter("id", id);
+        Postbox postbox;
+        try {
+            postbox = query.getSingleResult();
+        } catch (NoResultException e) {
+            System.out.println("More than one postbox with given ID " + id + " found.");
+            return;
+        }
+        postbox.setMessage(message);
+
         transaction.commit();
-        return;
     }
 
     @Override
