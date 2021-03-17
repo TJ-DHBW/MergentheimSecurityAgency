@@ -13,15 +13,8 @@ public class InMemoryParticipant {
 
     }
 
-    private InMemoryParticipant(Participant participant) {
+    public InMemoryParticipant(Participant participant) {
         this.participant = participant;
-    }
-
-    public static InMemoryParticipant toInMemory(Participant participant) {
-        if (participant.getType().getName().equals("intruder")) {
-            return new InMemoryIntruder(participant);
-        }
-        return new InMemoryParticipant(participant);
     }
 
     @Subscribe

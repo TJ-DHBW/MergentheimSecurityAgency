@@ -2,7 +2,6 @@ package msa.cql.query;
 
 import msa.cql.InMemoryChannel;
 import msa.cql.InMemoryIntruder;
-import msa.cql.InMemoryParticipant;
 import msa.cql.QueryContext;
 import msa.db.model.Channel;
 import msa.db.model.Participant;
@@ -37,7 +36,7 @@ public class IntrudeChannelQuery extends BaseQuery {
             context.setQueryResult("The Participant " + intruderName + " is not an intruder.");
             return;
         }
-        InMemoryIntruder intruder = (InMemoryIntruder) InMemoryParticipant.toInMemory(databaseParticipant);
+        InMemoryIntruder intruder = new InMemoryIntruder(databaseParticipant);
 
         channel.intrude(intruder);
 
