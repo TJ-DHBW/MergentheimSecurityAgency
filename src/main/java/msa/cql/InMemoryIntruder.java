@@ -13,7 +13,6 @@ public class InMemoryIntruder {
         this.participant = participant;
     }
 
-    //TODO Test this
     @Subscribe
     public void receive(MessageEvent event) {
         Participant receiver = context.getDatabase().findParticipantByName(participant.getName());
@@ -27,7 +26,7 @@ public class InMemoryIntruder {
 
 
         String keyFileName = event.getKeyFileName();
-        if (event.getAlgorithm().equals("rsa")) keyFileName = keyFileName.replaceFirst("\\.txt$", "_public.txt");
+        if (event.getAlgorithm().equals("rsa")) keyFileName = keyFileName.replaceFirst("\\.json$", "_public.json");
         String crackedMessage = CryptographyService.crack(event.getEncryptedMessage(), event.getAlgorithm(), keyFileName, 30);
 
         if (crackedMessage != null) {

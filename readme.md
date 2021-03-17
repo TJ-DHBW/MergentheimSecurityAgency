@@ -1,9 +1,20 @@
 # Mergentheim Security Agency
 
+## How to start
+
+1. Run task customFatJar for components rsa2, rsa_cracker, shift
+2. Run task jar for component shift_cracker
+3. Sign jars with method main in CryptographyService
+4. Run task run in MergentheimSecurityAgency
+
+## Provided 
+- keys in file keys
+- rsa key has to be at least 256 bit
+
 ## Aufgabenverteilung
 
-- **Student 1**: TJ-DHBW
-    - **01** Basisarchitektur
+- **Student 1**: 5542852
+    - ~~**01** Basisarchitektur~~
     - ~~**02** Taste \[F3], Debug-Modus~~
     - ~~**04** register participant~~
     - ~~**05** create channel~~
@@ -15,23 +26,13 @@
 
 <br>
 
-- **Student 2**: LuisaT-mgh
-    - **01** Basisarchitektur
-    - **03** Taste \[F8], Logfile
-    - **06** show channel
-    - **07** drop channel
-    - **09** send message
-    - **12** crack message
-    - **14** Komponente rsa.jar
-    - **15** Komponente shift_cracker.jar
+- **Student 2**: 3939573
+    - ~~**01** Basisarchitektur~~
+    - ~~**03** Taste \[F8], Logfile~~
+    - ~~**06** show channel~~
+    - ~~**07** drop channel~~
+    - ~~**09** send message~~
+    - ~~**12** crack message~~
+    - ~~**14** Komponente rsa.jar~~
+    - ~~**15** Komponente shift_cracker.jar~~
 
-## Weiteres Zeug das man schnell mal vergisst
-
-- ~~durch Drücken der Taste \[F5] wird der Befehl ausgeführt~~
-- Komponenten sind signiert
-- ~~Nur signierte Komponenten werden geladen.~~
-- Schlüssel im JSON-Format
-
-## Personal Todos
-
-- Check the keyFiles before passing them to the algorithm.

@@ -63,7 +63,7 @@ public class CQLManager {
         File chosenFile = null;
         if (files != null) {
             for (File file : files) {
-                Pattern pattern = Pattern.compile("(encrypt|decrypt|crack)_([^_]*)_([^_]*).txt");
+                Pattern pattern = Pattern.compile("^(encrypt|decrypt|crack)_([^_]*)_([^_]*).txt$");
                 Matcher m = pattern.matcher(file.getName());
                 m.matches();
                 Long lastModified = Long.parseLong(m.group(3));

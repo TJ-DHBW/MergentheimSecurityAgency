@@ -18,9 +18,9 @@ public class InMemoryChannel {
         this.eventBus = new EventBus(channelName);
         this.participant1 = new InMemoryParticipant(participant1);
         this.participant2 = new InMemoryParticipant(participant2);
+        this.intruders = new ArrayList<>();
         this.eventBus.register(this.participant1);
         this.eventBus.register(this.participant2);
-        this.intruders = new ArrayList<>();
     }
 
     public InMemoryChannel(Channel channel) {

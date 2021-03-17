@@ -22,7 +22,7 @@ public class Postbox {
     @JoinColumn(name = "participant_from_id")
     private Participant participantFrom;
 
-    @Column(name = "message")
+    @Column(name = "message", length = 9001)
     @NotNull
     private String message;
 

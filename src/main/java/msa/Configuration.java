@@ -4,9 +4,10 @@ public enum Configuration {
     instance;
 
     // Toggles detailed console output on or off.
-    public final boolean verbose = true;
-    //TODO enable this
-    public final boolean onlyLoadSignedJars = false;
+    public final boolean verbose = false;
+
+    // If true only signed jars can be loaded
+    public final boolean onlyLoadSignedJars = true;
 
 
     // FolderLocations

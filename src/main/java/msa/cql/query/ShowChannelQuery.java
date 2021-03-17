@@ -8,7 +8,7 @@ import java.util.regex.MatchResult;
 
 public class ShowChannelQuery extends BaseQuery{
     public ShowChannelQuery() {
-        super("show channel");
+        super("^show channel$");
     }
 
     @Override

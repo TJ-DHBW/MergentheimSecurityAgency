@@ -1,6 +1,7 @@
 package msa.cql.query;
 
 import msa.cql.InMemoryChannel;
+import msa.cql.InMemoryParticipant;
 import msa.cql.MessageEvent;
 import msa.cql.QueryContext;
 import msa.cql.cryptography.CryptographyService;
@@ -40,8 +41,7 @@ public class SendQuery extends BaseQuery{
             return;
         }
         String encryptedMessage = CryptographyService.encrypt(message, algorithm, keyFile);
-        InMemoryChannel inMemoryChannel = new InMemoryChannel(channel);
-        inMemoryChannel.setContext(context);
+        InMemoryChannel inMemoryChannel = context.getChannel(channel.getName());
         MessageEvent messageEvent = new MessageEvent(encryptedMessage, algorithm, keyFile, sender.getName(), receiver.getName());
         inMemoryChannel.getEventBus().post(messageEvent);
         Algorithm algorithmClass =  context.getDatabase().findAlgorithmByName(algorithm);

@@ -19,6 +19,7 @@ public class InMemoryParticipant {
 
     @Subscribe
     public void receive(MessageEvent event) {
+        System.out.println(this.participant.getName()+" received event");
         if(context == null){
             System.out.println("context is null");
         }

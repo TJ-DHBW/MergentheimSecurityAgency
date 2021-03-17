@@ -33,7 +33,6 @@ public class GUI extends Application {
         outputArea.setWrapText(true);
         outputArea.setEditable(false);
 
-        //TODO Make the creation of the database a bit more beautiful O.O
         HSQLDatabase database = new HSQLDatabase();
         database.init();                                                // Fill database with available algorithms etc.
         CQLManager cqlManager = new CQLManager(database);
@@ -43,13 +42,11 @@ public class GUI extends Application {
             System.out.println("[execute] pressed");
             cqlManager.handle(commandLineArea.getText());
             String queryResult = cqlManager.getContext().pullQueryResult();
-            commandLineArea.clear();
             if (queryResult.equals("")) {
                 // Not a valid query
                 outputArea.setText("Your input was not a valid query.");
             } else if (queryResult.startsWith(" ")) {
                 // No info to return
-                //TODO reset output Area?
                 outputArea.clear();
             } else {
                 // Has info to return
