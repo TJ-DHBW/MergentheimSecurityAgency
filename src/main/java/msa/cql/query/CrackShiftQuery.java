@@ -11,7 +11,6 @@ public class CrackShiftQuery extends BaseQuery{
         super("^crack encrypted message \"(.+)\" using shift$");
     }
 
-    //TODO test if works
     @Override
     public void execute(MatchResult matchResult, QueryContext context) {
         String plainText = CryptographyService.crack(matchResult.group(1), "shift", null, 30);

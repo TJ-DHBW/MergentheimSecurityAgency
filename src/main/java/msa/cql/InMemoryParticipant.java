@@ -42,7 +42,6 @@ public class InMemoryParticipant {
                 System.out.println("message null");
             }
             Postbox postbox = new Postbox(this.participant, context.getDatabase().findParticipantByName(event.getSenderName()), message);
-            //TODO check if postbox is supposed to be like this
             context.getDatabase().save(postbox);
             context.setQueryResult(participant.getName()+" received new message");
         }

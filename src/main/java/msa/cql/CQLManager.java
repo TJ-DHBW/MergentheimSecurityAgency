@@ -15,8 +15,6 @@ public class CQLManager {
 
     static {
         queries = new ArrayList<>();
-        //TODO remove the TestQuery
-        queries.add(new TestQuery());
 
         queries.add(new RegisterParticipantQuery());
         queries.add(new CreateChannelQuery());
@@ -28,7 +26,6 @@ public class CQLManager {
         queries.add(new ShowChannelQuery());
         queries.add(new CrackShiftQuery());
         queries.add(new CrackRSAQuery());
-        //TODO add all the queries to the List ^-^
     }
 
     public CQLManager(IMSADatabase database) {
@@ -66,7 +63,6 @@ public class CQLManager {
         File chosenFile = null;
         if (files != null) {
             for (File file : files) {
-                //TODO change if crack is dropped
                 Pattern pattern = Pattern.compile("(encrypt|decrypt|crack)_([^_]*)_([^_]*).txt");
                 Matcher m = pattern.matcher(file.getName());
                 boolean matches = m.matches();

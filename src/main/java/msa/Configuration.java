@@ -25,7 +25,6 @@ public enum Configuration {
     public final String shiftJarLocation = componentsFolder + fileSeparator + "shift" + fileSeparator + jarSubfolder + fileSeparator + "shift.jar";
     public final String shiftCrackerJarLocation = componentsFolder + fileSeparator + "shift_cracker" + fileSeparator + jarSubfolder + fileSeparator + "shift_cracker.jar";
 
-    //TODO insert the fully qualified classname of the components.
     public final String rsaClassName = "RSAWrapper";
     public final String rsaCrackerClassName = "RSACrackerWrapper";
     public final String shiftClassName = "Shift";

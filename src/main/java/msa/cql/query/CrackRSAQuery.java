@@ -12,7 +12,6 @@ public class CrackRSAQuery extends BaseQuery{
         super("^crack encrypted message \"(.+)\" using rsa and keyfile (.+)$");
     }
 
-    //TODO test if works
     @Override
     public void execute(MatchResult matchResult, QueryContext context) {
         String plainText = CryptographyService.crack(matchResult.group(1), "rsa", matchResult.group(2), 30);

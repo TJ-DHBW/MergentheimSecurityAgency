@@ -11,7 +11,6 @@ public class DropChannelQuery extends BaseQuery{
         super("^drop channel (\\S+)$");
     }
 
-    //TODO check if works
     @Override
     public void execute(MatchResult matchResult, QueryContext context) {
         Channel channelToDrop = context.getDatabase().findChannelByName(matchResult.group(1));

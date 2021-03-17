@@ -50,9 +50,6 @@ public class QueryContext {
             }
             return ret.toString();
         } else {
-            //TODO Maybe this has to go. >.< We will see...
-            //TODO it has to, if there should not be an error
-            //throw new IllegalStateException("The queryResult has not been set yet!");
             return "";
         }
     }

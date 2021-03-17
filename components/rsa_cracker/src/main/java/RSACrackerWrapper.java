@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.util.Base64;
 
-//TODO Test this
 public class RSACrackerWrapper {
     private static final RSACrackerWrapper instance = new RSACrackerWrapper();
     public Port port = new Port();
@@ -32,7 +31,6 @@ public class RSACrackerWrapper {
         }
     }
 
-    //TODO test
     private BigInteger[] extractKeyFromKeyFile(File keyFile) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(keyFile));

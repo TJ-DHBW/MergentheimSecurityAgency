@@ -6,8 +6,7 @@ import java.io.*;
 import java.time.Instant;
 
 public class Logger {
-    //TODO Test this
-    //TODO maybe make it more detailed?
+
     public static void logEncryption(String plainMessage, String encryptedMessage, String algorithm, String keyFile) {
         String key = readWholeFile(new File(Configuration.instance.keyFileFolder + Configuration.instance.fileSeparator + keyFile));
         key = key.replace("\n", "");
@@ -23,8 +22,6 @@ public class Logger {
         saveInLogFile(content, fileName);
     }
 
-    //TODO Test this
-    //TODO maybe make it more detailed?
     public static void logDecryption(String encryptedMessage, String plainMessage, String algorithm, String keyFile) {
         String key = readWholeFile(new File(Configuration.instance.keyFileFolder + Configuration.instance.fileSeparator + keyFile));
         key = key.replace("\n", "");
@@ -58,7 +55,6 @@ public class Logger {
         saveInLogFile(content, fileName);
     }
 
-    //TODO Test this
     private static void saveInLogFile(String content, String fileName) {
         createLogFolderIfNotPresent();
         File logFile = new File(Configuration.instance.logFileFolder + Configuration.instance.fileSeparator + fileName);

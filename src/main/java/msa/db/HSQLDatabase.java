@@ -50,7 +50,6 @@ public class HSQLDatabase implements IMSADatabase {
         return;
     }
 
-    //TODO Test
     @Override
     public Algorithm findAlgorithmByName(String name) {
         String queryString = "FROM Algorithm A WHERE A.name = :name";
@@ -63,7 +62,6 @@ public class HSQLDatabase implements IMSADatabase {
         }
     }
 
-    //TODO Test
     @Override
     public Type findTypeByName(String name) {
         String queryString = "FROM Type T WHERE T.name = :name";
@@ -76,7 +74,6 @@ public class HSQLDatabase implements IMSADatabase {
         }
     }
 
-    //TODO Test
     @Override
     public Participant findParticipantByName(String name) {
         String queryString = "FROM Participant P WHERE P.name = :name";
@@ -89,16 +86,6 @@ public class HSQLDatabase implements IMSADatabase {
         }
     }
 
-    //TODO IMPORTANT Test
-    @Override
-    public List<Channel> findAllChannelWithParticipant(Participant participant) {
-        String queryString = "FROM Channel C WHERE C.participant1 = :participant OR C.participant2 = :participant";
-        Query<Channel> query = session.createQuery(queryString, Channel.class);
-        query.setParameter("participant", participant);
-        return query.list();
-    }
-
-    //TODO IMPORTANT Test
     @Override
     public Channel findChannelByParticipants(Participant participant1, Participant participant2) {
         String queryString = "FROM Channel C WHERE (C.participant1 = :participant1 AND C.participant2 = :participant2) OR (C.participant1 = :participant2 AND C.participant2 = :participant1)";
@@ -112,7 +99,6 @@ public class HSQLDatabase implements IMSADatabase {
         }
     }
 
-    //TODO Test
     @Override
     public Channel findChannelByName(String name) {
         String queryString = "FROM Channel C WHERE C.name = :name";
@@ -125,14 +111,8 @@ public class HSQLDatabase implements IMSADatabase {
         }
     }
 
-    //TODO Test
     @Override
     public List<Channel> getAllChannel() {
-        //TODO remove
-        List<Channel> test = session.createQuery("FROM Channel", Channel.class).list();
-        for(Channel channel : test){
-            System.out.println(channel.getName()+channel.getParticipant1()+channel.getParticipant2());
-        }
         return session.createQuery("FROM Channel", Channel.class).list();
     }
 }

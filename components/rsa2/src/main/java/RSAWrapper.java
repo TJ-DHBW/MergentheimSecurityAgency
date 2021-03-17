@@ -29,7 +29,6 @@ public class RSAWrapper {
         return Utility.numberToString(decryptedMessageAsNumber);
     }
 
-    //TODO check if works, implement in other algorithms
     private Key extractKeyFromKeyFile(File keyFile, boolean privateKey) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(keyFile));

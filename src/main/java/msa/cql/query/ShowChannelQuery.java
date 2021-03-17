@@ -11,7 +11,6 @@ public class ShowChannelQuery extends BaseQuery{
         super("show channel");
     }
 
-    //TODO check if works
     @Override
     public void execute(MatchResult matchResult, QueryContext context) {
         List<Channel> channelList = context.getDatabase().getAllChannel();

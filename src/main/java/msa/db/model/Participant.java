@@ -5,11 +5,6 @@ import com.sun.istack.NotNull;
 import javax.persistence.*;
 import java.util.Objects;
 
-/*
-import de.dhbw.App;
-import de.dhbw.LogMessage;
-import de.dhbw.factory.AlgorithmFactory;
- */
 
 @Entity
 @Table(name = "participants")
@@ -59,14 +54,6 @@ public class Participant {
     private void setType(Type type) {
         this.type = type;
     }
-
-    //TODO fix this
-    /*
-    public static Participant byName(App app, String name) {
-        var cq = app.getSession().createQuery("FROM Participant WHERE name = :name");
-        return (Participant) cq.setParameter("name", name).getSingleResult();
-    }
-     */
 
     @Override
     public boolean equals(Object o) {

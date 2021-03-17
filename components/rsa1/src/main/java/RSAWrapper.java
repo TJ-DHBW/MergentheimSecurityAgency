@@ -32,7 +32,6 @@ public class RSAWrapper {
         return rsaCipher.decrypt(decryption, key);
     }
 
-    //TODO check if works, implement in other algorithms
     private Key extractKeyFromKeyFile(File keyFile, boolean privateKey) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(keyFile));

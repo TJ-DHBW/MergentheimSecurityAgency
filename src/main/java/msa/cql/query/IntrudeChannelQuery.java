@@ -14,7 +14,6 @@ public class IntrudeChannelQuery extends BaseQuery {
         super("^intrude channel (\\S+) by (\\S+)$");
     }
 
-    //TODO Test this
     @Override
     public void execute(MatchResult matchResult, QueryContext context) {
         String channelName = matchResult.group(1);

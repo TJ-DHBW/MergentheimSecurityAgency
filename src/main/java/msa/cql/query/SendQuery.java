@@ -18,15 +18,12 @@ public class SendQuery extends BaseQuery{
 
     @Override
     public void execute(MatchResult matchResult, QueryContext context) {
-        //TODO go over and check if public and private is supposed to be so
         Participant sender = context.getDatabase().findParticipantByName(matchResult.group(2));
         Participant receiver = context.getDatabase().findParticipantByName(matchResult.group(3));
         String message = matchResult.group(1);
         String algorithm = matchResult.group(4);
-        String keyFilePrivate = matchResult.group(5);
-        String keyFilePublic = keyFilePrivate.replaceAll(".txt", "_public.txt");
+        String keyFile = matchResult.group(5);
         Channel channel = context.getDatabase().findChannelByParticipants(sender, receiver);
-        //TODO check if necessary
         if(channel == null){
             channel = context.getDatabase().findChannelByParticipants(receiver, sender);
         }
@@ -42,17 +39,16 @@ public class SendQuery extends BaseQuery{
             context.setQueryResult("no valid channel from " + sender.getName() + " to " + receiver.getName());
             return;
         }
-        String encryptedMessage = CryptographyService.encrypt(message, algorithm, keyFilePublic);
+        String encryptedMessage = CryptographyService.encrypt(message, algorithm, keyFile);
         InMemoryChannel inMemoryChannel = new InMemoryChannel(channel);
         inMemoryChannel.setContext(context);
-        MessageEvent messageEvent = new MessageEvent(encryptedMessage, algorithm, keyFilePrivate, sender.getName(), receiver.getName());
+        MessageEvent messageEvent = new MessageEvent(encryptedMessage, algorithm, keyFile, sender.getName(), receiver.getName());
         inMemoryChannel.getEventBus().post(messageEvent);
         Algorithm algorithmClass =  context.getDatabase().findAlgorithmByName(algorithm);
         if(algorithmClass == null){
-            //TODO check if necessary
             algorithmClass = new Algorithm(algorithm);
             context.getDatabase().save(algorithmClass);
         }
-        context.getDatabase().save(new Message(sender, receiver, message, algorithmClass, encryptedMessage, keyFilePrivate));
+        context.getDatabase().save(new Message(sender, receiver, message, algorithmClass, encryptedMessage, keyFile));
     }
 }

@@ -17,7 +17,6 @@ public class CryptographyService {
         if (plainMessage == null || algorithm == null || keyFileName == null)
             throw new IllegalArgumentException("Parameters cant be null.");
 
-        //TODO Test this
         if(!keyFileName.contains("_public")) {
             keyFileName = keyFileName.replaceAll(".json", "_public.json");
         }
@@ -38,7 +37,6 @@ public class CryptographyService {
         if (encryptedMessage == null || algorithm == null || keyFileName == null)
             throw new IllegalArgumentException("Parameters cant be null.");
 
-        //TODO Test this
         File keyFile = new File(Configuration.instance.keyFileFolder + Configuration.instance.fileSeparator + keyFileName);
         ICryptographyAlgorithm cryptoAlgorithm = getAlgorithmImplementationByString(algorithm);
 
@@ -70,7 +68,6 @@ public class CryptographyService {
         }
     }
 
-    //TODO Test this
     public static String crack(String encryptedMessage, String algorithm, String keyFileName, int seconds) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         Future<String> future = executor.submit(() -> CryptographyService.crack(encryptedMessage, algorithm, keyFileName));
@@ -86,7 +83,6 @@ public class CryptographyService {
         return null;
     }
 
-    //TODO Test this
     private static ICryptographyAlgorithm getAlgorithmImplementationByString(String algorithm) {
         String jarLocation, className;
 
@@ -119,7 +115,6 @@ public class CryptographyService {
         return componentPort;
     }
 
-    //TODO Test this
     private static ICryptographyCracker getCrackerImplementationByString(String algorithm) {
         String jarLocation, className;
 
@@ -173,24 +168,10 @@ public class CryptographyService {
         }
         return false;
     }
-    //TODO remove before handing in
-    public static void fmain(String[] args) throws InterruptedException, IOException {
-        String testRSA = CryptographyService.encrypt("hallo", "rsa", "rsa_key_public.json");
-        System.out.println(testRSA);
-        String decryptedRSA = CryptographyService.decrypt(testRSA, "rsa", "rsa_key.json");
-        System.out.println(decryptedRSA);
 
-        //String test = CryptographyService.crack("kdoor", "shift", null);
-        //System.out.println(test);
-        String test2 = CryptographyService.encrypt("hallo", "shift", "shift_key.json");
-        System.out.println(test2);
-        String decrypted = CryptographyService.decrypt(test2, "shift", "shift_key.json");
-        System.out.println(decrypted);
-    }
-    //TODO remove before handing in
+    // Execute this main, if you want to sign all used components!
+    // The components have to exist first.
     public static void main(String[] args) throws InterruptedException, IOException {
-        // Execute this main, if you want to sign all used components!
-        // The components have to exist first.
         String[] jarLocationsOfJarsToSign = new String[]{Configuration.instance.rsaJarLocation,
                 Configuration.instance.shiftJarLocation,
                 Configuration.instance.rsaCrackerJarLocation,

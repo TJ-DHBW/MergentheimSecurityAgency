@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.List;
 
 public interface IMSADatabase {
-    //TODO write some boring stuff in here.
 
     Serializable save(Object object);
 
@@ -22,8 +21,6 @@ public interface IMSADatabase {
     Type findTypeByName(String name);
 
     Participant findParticipantByName(String name);
-
-    List<Channel> findAllChannelWithParticipant(Participant participant);
 
     Channel findChannelByParticipants(Participant participant1, Participant participant2);
 
