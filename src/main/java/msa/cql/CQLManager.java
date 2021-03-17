@@ -11,7 +11,6 @@ import java.util.regex.Pattern;
 
 public class CQLManager {
     private static final ArrayList<BaseQuery> queries;
-    private final QueryContext context;
 
     static {
         queries = new ArrayList<>();
@@ -27,6 +26,8 @@ public class CQLManager {
         queries.add(new CrackShiftQuery());
         queries.add(new CrackRSAQuery());
     }
+
+    private final QueryContext context;
 
     public CQLManager(IMSADatabase database) {
         this.context = new QueryContext(database);
@@ -72,12 +73,11 @@ public class CQLManager {
                     lastModifiedTime = lastModified;
                 }
             }
-        }
-        else{
+        } else {
             this.getContext().setQueryResult("no logfiles found");
             return;
         }
-        if (chosenFile == null){
+        if (chosenFile == null) {
             this.getContext().setQueryResult("no logfiles found");
             return;
         }

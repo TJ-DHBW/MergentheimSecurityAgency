@@ -17,7 +17,7 @@ public class CryptographyService {
         if (plainMessage == null || algorithm == null || keyFileName == null)
             throw new IllegalArgumentException("Parameters cant be null.");
 
-        if(algorithm.equals("rsa") && !keyFileName.contains("_public")) {
+        if (algorithm.equals("rsa") && !keyFileName.contains("_public")) {
             keyFileName = keyFileName.replaceAll(".json", "_public.json");
         }
         File keyFile = new File(Configuration.instance.keyFileFolder + Configuration.instance.fileSeparator + keyFileName);
@@ -76,7 +76,7 @@ public class CryptographyService {
         } catch (TimeoutException e) {
             future.cancel(true);
         } catch (InterruptedException | ExecutionException e) {
-            throw new RuntimeException("Something in the cracker went wrong: "+e.getMessage());
+            throw new RuntimeException("Something in the cracker went wrong: " + e.getMessage());
         } finally {
             executor.shutdownNow();
         }

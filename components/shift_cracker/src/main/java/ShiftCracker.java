@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class ShiftCracker {
     private static final DecimalFormat decimalFormat = new DecimalFormat("#0.00000");
 
-    public String crackMessage(String encodedMessage){
+    public String crackMessage(String encodedMessage) {
         Scanner scanner = new Scanner(encodedMessage);
         String source = scanner.nextLine().trim().toUpperCase();
 
@@ -36,8 +36,6 @@ public class ShiftCracker {
         }
         return stringBuilder.toString();
     }
-
-
 
 
     private String smartShift(int shift, int[] unicode, int[] unicodeCopy) {

@@ -12,7 +12,7 @@ repositories {
 
 javafx {
     version = "15.0.1"
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
+    modules = ['javafx.controls', 'javafx.fxml']
 }
 
 dependencies {
@@ -32,7 +32,7 @@ compileJava {
     }
 }
 
-mainClassName='msa.GUI'
+mainClassName = 'msa.GUI'
 
 run {
     doFirst {

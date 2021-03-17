@@ -3,17 +3,15 @@ package msa.cql;
 import msa.Configuration;
 import msa.db.IMSADatabase;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class QueryContext {
     private final IMSADatabase database;
     private final HashMap<String, InMemoryChannel> channelz;
-
+    private final ArrayList<String> additionalInfo;
     private boolean debugOn;
     private String queryResult;
-    private final ArrayList<String> additionalInfo;
 
     public QueryContext(IMSADatabase database) {
         this.database = database;

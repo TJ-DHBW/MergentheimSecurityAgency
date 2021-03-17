@@ -1,9 +1,12 @@
-import java.io.*;
-import java.math.BigInteger;
-import java.util.Base64;
-
 import msa.cql.cryptography.interfaces.IRSAAlgorithm;
 import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.math.BigInteger;
+import java.util.Base64;
 
 public class RSAWrapper {
     private static final RSAWrapper instance = new RSAWrapper();
@@ -38,11 +41,10 @@ public class RSAWrapper {
                 fileContent.append(line);
             }
             JSONObject keyFileJonObject = new JSONObject(fileContent.toString());
-            if(privateKey){
+            if (privateKey) {
                 return new Key(new BigInteger(String.valueOf(keyFileJonObject.getBigInteger("n"))),
                         new BigInteger(String.valueOf(keyFileJonObject.getBigInteger("d"))));
-            }
-            else{
+            } else {
                 return new Key(new BigInteger(String.valueOf(keyFileJonObject.getBigInteger("n"))),
                         new BigInteger(String.valueOf(keyFileJonObject.getBigInteger("e"))));
             }
@@ -51,6 +53,7 @@ public class RSAWrapper {
         }
         return null;
     }
+
     public class Port implements IRSAAlgorithm {
         @Override
         public String encrypt(String plainMessage, File keyFile) {

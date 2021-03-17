@@ -6,7 +6,7 @@ import msa.db.model.Channel;
 import java.util.List;
 import java.util.regex.MatchResult;
 
-public class ShowChannelQuery extends BaseQuery{
+public class ShowChannelQuery extends BaseQuery {
     public ShowChannelQuery() {
         super("^show channel$");
     }
@@ -14,11 +14,11 @@ public class ShowChannelQuery extends BaseQuery{
     @Override
     public void execute(MatchResult matchResult, QueryContext context) {
         List<Channel> channelList = context.getDatabase().getAllChannel();
-        if(channelList == null || channelList.size() == 0){
+        if (channelList == null || channelList.size() == 0) {
             return;
         }
         StringBuilder stringBuilder = new StringBuilder();
-        for(Channel channel : channelList){
+        for (Channel channel : channelList) {
             stringBuilder.append(channel.getName()).append("\t").append("|");
             stringBuilder.append(channel.getParticipant1().getName());
             stringBuilder.append(" and ");

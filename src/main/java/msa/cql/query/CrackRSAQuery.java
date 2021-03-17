@@ -6,7 +6,7 @@ import msa.cql.cryptography.CryptographyService;
 
 import java.util.regex.MatchResult;
 
-public class CrackRSAQuery extends BaseQuery{
+public class CrackRSAQuery extends BaseQuery {
 
     public CrackRSAQuery() {
         super("^crack encrypted message \"(.+)\" using rsa and keyfile (.+)$");
@@ -17,10 +17,9 @@ public class CrackRSAQuery extends BaseQuery{
         String plainText = CryptographyService.crack(matchResult.group(1), "rsa", matchResult.group(2), 30);
         if (context.isDebugOn())
             Logger.logCrack(matchResult.group(1), plainText, "RSA", matchResult.group(2));
-        if(plainText == null){
-            context.setQueryResult("cracking encrypted message "+matchResult.group(1)+" failed");
-        }
-        else {
+        if (plainText == null) {
+            context.setQueryResult("cracking encrypted message " + matchResult.group(1) + " failed");
+        } else {
             context.setQueryResult(plainText);
         }
     }

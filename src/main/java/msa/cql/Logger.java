@@ -37,9 +37,9 @@ public class Logger {
         saveInLogFile(content, fileName);
     }
 
-    public static void logCrack(String encryptedMessage, String plainMessage, String algorithm, String keyFile){
+    public static void logCrack(String encryptedMessage, String plainMessage, String algorithm, String keyFile) {
         String key = "no key given";
-        if(keyFile!=null && keyFile != "") {
+        if (keyFile != null && keyFile != "") {
             key = readWholeFile(new File(Configuration.instance.keyFileFolder + Configuration.instance.fileSeparator + keyFile));
             key = key.replace("\n", "");
         }
